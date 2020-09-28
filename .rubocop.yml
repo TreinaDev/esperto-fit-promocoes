@@ -1,0 +1,22 @@
+require:
+  - rubocop-rails
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'spec/spec_helper.rb'
+    - 'node_modules/**/*'
+  NewCops: enable
+
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context', 'feature', 'scenario']
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
