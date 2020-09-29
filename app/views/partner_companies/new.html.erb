@@ -1,0 +1,27 @@
+<% if @partner_company.errors.any? %>
+    <ul>
+        <% @partner_company.errors.full_messages.each do |message| %>
+        <li> <%= message %></li>
+        <% end%>
+    </ul>
+<% end %>
+
+<%= form_with model: @partner_company, local: true do |form| %>
+  <div>
+    <%= form.label :name, 'Nome' %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :cnpj, 'CNPJ' %>
+    <%= form.text_field :cnpj %>
+  </div>
+  <div>
+    <%= form.label :address, 'Endereço' %>
+    <%= form.text_field :address %>
+  </div>
+  <div>
+    <%= form.label :email, 'Email' %>
+    <%= form.text_field :email %>
+  </div>
+  <%= form.submit 'Cadastrar' %>
+<% end %>
