@@ -32,9 +32,6 @@ feature 'User register partner company' do
     click_on 'Cadastrar Empresa'
     click_on 'Cadastrar'
 
-    expect(page).to have_content('não pode ficar em branco')
-    expect(page).to have_content('não pode ficar em branco')
-    expect(page).to have_content('não pode ficar em branco')
-    expect(page).to have_content('não pode ficar em branco')
+    expect(page).to have_content('não pode ficar em branco', count: 4)
   end
 end
