@@ -4,9 +4,9 @@ feature 'User' do
   scenario 'create account' do
     visit root_path
     click_on 'Criar conta'
-    fill_in 'Email', with: 'teste@espertofit.com.br'
+    fill_in 'E-mail', with: 'teste@espertofit.com.br'
     fill_in 'Senha', with: '12345678'
-    fill_in 'Confirmar senha', with: '12345678'
+    fill_in 'Confirme sua senha', with: '12345678'
     click_on 'Enviar'
 
     expect(current_path).to eq root_path
@@ -14,13 +14,23 @@ feature 'User' do
     expect(page).to have_link 'Sair'
     expect(page).not_to have_link 'Criar conta'
   end
+  scenario 'tries to create account but with invalid domain' do
+    visit root_path
+    click_on 'Criar conta'
+    fill_in 'E-mail', with: 'teste@invalido.com.br'
+    fill_in 'Senha', with: '12345678'
+    fill_in 'Confirme sua senha', with: '12345678'
+    click_on 'Enviar'
 
+    expect(page).to have_content 'E-mail de registro inválido'
+    expect(page).not_to have_link 'Sair'
+  end
   scenario 'create account and is not admin by default' do
     visit root_path
     click_on 'Criar conta'
-    fill_in 'Email', with: 'teste@espertofit.com.br'
+    fill_in 'E-mail', with: 'teste@espertofit.com.br'
     fill_in 'Senha', with: '12345678'
-    fill_in 'Confirmar senha', with: '12345678'
+    fill_in 'Confirme sua senha', with: '12345678'
     click_on 'Enviar'
 
     expect(User.first.admin).to eq false
@@ -30,7 +40,7 @@ feature 'User' do
     create(:user, email: 'teste@espertofit.com.br', password: '12345678')
     visit root_path
     click_on 'Entrar'
-    fill_in 'Email', with: 'teste@espertofit.com.br'
+    fill_in 'E-mail', with: 'teste@espertofit.com.br'
     fill_in 'Senha', with: '12345678'
     click_on 'Log in'
 
@@ -45,7 +55,7 @@ feature 'User' do
     create(:user, email: 'teste@espertofit.com.br', password: '12345678')
     visit root_path
     click_on 'Entrar'
-    fill_in 'Email', with: 'teste@espertofit.com.br'
+    fill_in 'E-mail', with: 'teste@espertofit.com.br'
     fill_in 'Senha', with: '12345678'
     click_on 'Log in'
     click_on 'Sair'
