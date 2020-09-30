@@ -1,4 +1,6 @@
 class PartnerCompaniesController < ApplicationController
+  before_action :authenticate_user!, only: %i[index show new]
+
   def index
     @partner_companies = PartnerCompany.all
   end
@@ -13,6 +15,7 @@ class PartnerCompaniesController < ApplicationController
 
   def create
     @partner_company = PartnerCompany.new(partner_company_params)
+    @partner_company.user = current_user
     if @partner_company.save
       redirect_to @partner_company, notice: 'Empresa cadastrada com sucesso'
     else

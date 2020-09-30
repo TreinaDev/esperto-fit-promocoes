@@ -1,3 +1,7 @@
 class PartnerCompany < ApplicationRecord
-  validates :name, :cnpj, :address, :email, presence: { message: 'não pode ficar em branco' }
+  belongs_to :user
+
+  validates :name, :cnpj, :address, :email,
+            presence: true
+  validates :cnpj, uniqueness: true
 end

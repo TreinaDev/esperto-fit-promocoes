@@ -1,9 +1,16 @@
 require 'rails_helper'
 
 feature 'User register partner company' do
+  scenario 'must be logged in to register a partner company' do
+    create(:partner_company)
+
+    visit new_partner_company_path
+
+    expect(current_path).to eq new_user_session_path
+  end
+
   scenario 'successfully' do
-    user = User.create!(full_name: 'Carlos', social_name: 'Carlos',
-                        email: 'carlos@espertofit.com.br', password: '123456789')
+    user = create(:user)
 
     login_as(user, scope: :user)
     visit root_path
@@ -23,8 +30,7 @@ feature 'User register partner company' do
   end
 
   scenario 'fields cannot be blank' do
-    user = User.create!(full_name: 'Carlos', social_name: 'Carlos',
-                        email: 'carlos@espertofit.com.br', password: '123456789')
+    user = create(:user)
 
     login_as(user, scope: :user)
     visit root_path
@@ -32,6 +38,9 @@ feature 'User register partner company' do
     click_on 'Cadastrar Empresa'
     click_on 'Cadastrar'
 
-    expect(page).to have_content('não pode ficar em branco', count: 4)
+    expect(page).to have_content('Nome não pode ficar em branco')
+    expect(page).to have_content('CNPJ não pode ficar em branco')
+    expect(page).to have_content('Endereço não pode ficar em branco')
+    expect(page).to have_content('Email não pode ficar em branco')
   end
 end

@@ -1,0 +1,15 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      partner_company:
+        one: Empresa parceira
+        other: Empresas parceiras
+    attributes:
+      partner_company:
+        name: Nome
+        cnpj: CNPJ
+        address: Endereço
+        email: Email
+        user: Funcionário responsável
+        user_id: Funcionário responsável

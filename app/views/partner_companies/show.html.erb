@@ -1,8 +1,9 @@
 <div>
   <ul>
-    <li> <%= @partner_company.name %> </li>
-    <li> <%= @partner_company.cnpj %> </li>
-    <li> <%= @partner_company.address %> </li>
-    <li> <%= @partner_company.email %> </li>
+    <li> <%= "#{PartnerCompany.human_attribute_name(:name)}: #{@partner_company.name}" %> </li>
+    <li> <%= "#{PartnerCompany.human_attribute_name(:cnpj)}: #{@partner_company.cnpj}" %> </li>
+    <li> <%= "#{PartnerCompany.human_attribute_name(:address)}: #{@partner_company.address}" %> </li>
+    <li> <%= "#{PartnerCompany.human_attribute_name(:email)}: #{@partner_company.email}" %> </li>
+    <li> <%= "#{PartnerCompany.human_attribute_name(:user)}: #{@partner_company.user.email}" %> </li>
   </ul>
 </div>

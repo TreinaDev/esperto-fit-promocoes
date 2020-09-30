@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_29_184324) do
+ActiveRecord::Schema.define(version: 2020_09_30_203104) do
 
   create_table "partner_companies", force: :cascade do |t|
     t.string "name"
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 2020_09_29_184324) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["cnpj"], name: "index_partner_companies_on_cnpj", unique: true
+    t.index ["user_id"], name: "index_partner_companies_on_user_id"
   end
 
   create_table "partner_company_employees", force: :cascade do |t|
@@ -43,5 +46,6 @@ ActiveRecord::Schema.define(version: 2020_09_29_184324) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "partner_companies", "users"
   add_foreign_key "partner_company_employees", "partner_companies"
 end
