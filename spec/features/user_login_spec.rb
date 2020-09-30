@@ -14,6 +14,7 @@ feature 'User' do
     expect(page).to have_link 'Sair'
     expect(page).not_to have_link 'Criar conta'
   end
+
   scenario 'tries to create account but with invalid domain' do
     visit root_path
     click_on 'Criar conta'
@@ -22,9 +23,10 @@ feature 'User' do
     fill_in 'Confirme sua senha', with: '12345678'
     click_on 'Enviar'
 
-    expect(page).to have_content 'E-mail de registro inválido'
+    expect(page).to have_content 'E-mail não é válido'
     expect(page).not_to have_link 'Sair'
   end
+
   scenario 'create account and is not admin by default' do
     visit root_path
     click_on 'Criar conta'
