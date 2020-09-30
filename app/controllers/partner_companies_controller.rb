@@ -1,9 +1,12 @@
 class PartnerCompaniesController < ApplicationController
-  
+  def index
+    @partner_companies = PartnerCompany.all
+  end
+
   def show
     @partner_company = PartnerCompany.find(params[:id])
   end
-  
+
   def new
     @partner_company = PartnerCompany.new
   end
@@ -18,8 +21,9 @@ class PartnerCompaniesController < ApplicationController
   end
 
   private
-    def partner_company_params
-      params.require(:partner_company)
-            .permit(:name, :cnpj, :address, :email)
-    end
+
+  def partner_company_params
+    params.require(:partner_company)
+          .permit(:name, :cnpj, :address, :email)
+  end
 end

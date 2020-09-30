@@ -1,9 +1,9 @@
 <% if @partner_company.errors.any? %>
-    <ul>
-        <% @partner_company.errors.full_messages.each do |message| %>
-        <li> <%= message %></li>
-        <% end%>
-    </ul>
+  <ul>
+      <% @partner_company.errors.full_messages.each do |message| %>
+      <li> <%= message %></li>
+      <% end%>
+  </ul>
 <% end %>
 
 <%= form_with model: @partner_company, local: true do |form| %>

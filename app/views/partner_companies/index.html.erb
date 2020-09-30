@@ -1,0 +1,16 @@
+<div>
+  <%= link_to 'Cadastrar Empresa', new_partner_company_path %>
+</div>
+
+<% if @partner_companies.empty? %>
+  <h3> Nenhuma empresa parceira cadastrada </h3>
+<% end %>
+
+<div>
+  <% @partner_companies.each do |company| %>
+    <ul>
+      <li> <%= link_to company.name, company %> </li>
+    </ul>
+  <% end %>
+</div>
+
