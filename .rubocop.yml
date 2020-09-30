@@ -20,3 +20,5 @@ Metrics/BlockLength:
   ExcludedMethods: ['describe', 'context', 'feature', 'scenario']
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+Style/MixinUsage: 
+  Enabled: false

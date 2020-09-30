@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   context 'E-mail' do
     it 'invalid domain' do
-      user = User.new(email: 'test@invalid.com.br', password: '12345678')
+      user = build(:user, email: 'test@invalid.com.br')
       user.valid?
 
       expect(user.errors[:email]).to include('não é válido')
