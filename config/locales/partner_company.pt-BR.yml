@@ -1,0 +1,26 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      partner_company:
+        one: Empresa parceira
+        other: Empresas parceiras
+    attributes:
+      partner_company:
+        name: Nome
+        cnpj: CNPJ
+        address: Endereço
+        email: Email
+        discount: Desconto
+        discount_duration: Prazo
+        discount_duration_undefined: Prazo Indefinido
+        user: Funcionário responsável
+        user_id: Funcionário responsável
+  partner_companies:
+    index:
+      not_found: Nenhuma empresa parceira cadastrada
+    create:
+      successfull: Cadastro feito com sucesso
+    new:
+      duration_undefined: Prazo Indefinido
+      duration_defined: Prazo Definido
