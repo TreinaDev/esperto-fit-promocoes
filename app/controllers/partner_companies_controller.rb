@@ -16,6 +16,7 @@ class PartnerCompaniesController < ApplicationController
   def create
     @partner_company = PartnerCompany.new(partner_company_params)
     @partner_company.user = current_user
+    @partner_company.duration = nil if @partner_company.indefinite
     if @partner_company.save
       redirect_to @partner_company, notice: 'Empresa cadastrada com sucesso'
     else
@@ -27,6 +28,7 @@ class PartnerCompaniesController < ApplicationController
 
   def partner_company_params
     params.require(:partner_company)
-          .permit(:name, :cnpj, :address, :email)
+          .permit(:name, :cnpj, :address, :email,
+                  :duration, :discount, :indefinite)
   end
 end

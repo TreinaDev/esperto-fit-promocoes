@@ -4,6 +4,12 @@
     <li> <%= "#{PartnerCompany.human_attribute_name(:cnpj)}: #{@partner_company.cnpj}" %> </li>
     <li> <%= "#{PartnerCompany.human_attribute_name(:address)}: #{@partner_company.address}" %> </li>
     <li> <%= "#{PartnerCompany.human_attribute_name(:email)}: #{@partner_company.email}" %> </li>
+    <li> <%= "#{PartnerCompany.human_attribute_name(:discount)}: #{number_to_percentage(@partner_company.discount, precision: 0)}" %> </li>
+    <% if @partner_company.indefinite %>
+      <li> Prazo: <%= PartnerCompany.human_attribute_name(:indefinite) %> </li>
+    <% else %>
+      <li> Prazo: <%= "#{@partner_company.duration} meses" %> </li>
+    <% end %>
     <li> <%= "#{PartnerCompany.human_attribute_name(:user)}: #{@partner_company.user.email}" %> </li>
   </ul>
 </div>

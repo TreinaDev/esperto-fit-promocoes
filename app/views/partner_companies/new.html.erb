@@ -23,5 +23,37 @@
     <%= form.label :email %>
     <%= form.text_field :email %>
   </div>
+  <div>
+    <%= form.label :discount, 'Desconto' %> <i> (porcentagem) </i>
+    <%= form.number_field :discount %>
+  </div>
+  <div>
+    <%= form.label :indefinite, 'Prazo Indefinido', value: true %>
+    <%= form.radio_button :indefinite, true, :value => true %>
+  </div>
+  <div>
+    <%= form.label :indefinite, 'Prazo Definido', value: false %>
+    <%= form.radio_button :indefinite, false, :value => false, :checked => true %>
+  </div>
+  <div id="duration" style = "display:nome;" >
+    <%= form.label :duration, 'Duração' %> <i> (meses) </i>
+    <%= form.number_field :duration %>
+  </div>
   <%= form.submit 'Cadastrar' %>
 <% end %>
+
+<script type="text/javascript">
+  var checkbox_false = document.getElementById('partner_company_indefinite_false');
+  var checkbox_true = document.getElementById('partner_company_indefinite_true');
+  var details_div = document.getElementById('duration');
+  checkbox_false.onchange = function() {
+     if(this.checked) {
+       details_div.style['display'] = 'block';
+     }
+  };
+  checkbox_true.onchange = function() {
+    if(this.checked) {
+       details_div.style['display'] = 'none';
+     }
+  };
+</script>

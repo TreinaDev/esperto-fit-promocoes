@@ -11,5 +11,8 @@ pt-BR:
         cnpj: CNPJ
         address: Endereço
         email: Email
+        discount: Desconto
+        duration: Duração
+        indefinite: Indefinido
         user: Funcionário responsável
         user_id: Funcionário responsável
