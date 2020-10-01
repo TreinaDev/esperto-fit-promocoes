@@ -1,0 +1,25 @@
+<%= form_with model: @promotion, local: true do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :discount_rate %>
+    <%= f.number_field :discount_rate %>
+  </div>
+  <div>
+    <%= f.label :coupon_quantity %>
+    <%= f.number_field :coupon_quantity %>
+  </div>
+  <div>
+    <%= f.label :expire_date %>
+    <%= f.date_field :expire_date %>
+  </div>
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

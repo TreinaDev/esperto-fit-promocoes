@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_29_203728) do
+ActiveRecord::Schema.define(version: 2020_10_01_191034) do
 
   create_table "partner_companies", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,18 @@ ActiveRecord::Schema.define(version: 2020_09_29_203728) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["partner_company_id"], name: "index_partner_company_employees_on_partner_company_id"
+  end
+
+  create_table "promotions", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.decimal "discount_rate"
+    t.integer "coupon_quantity"
+    t.date "expire_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "token"
+    t.index ["token"], name: "index_promotions_on_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|
