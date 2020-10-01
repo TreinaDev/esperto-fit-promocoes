@@ -46,7 +46,7 @@ feature 'user view partner companies' do
 
     company = create(:partner_company, name: 'Empresa AAA', cnpj: '90.530.299/0001-89',
                                        address: 'Av. Jabaquara, 1000', email: 'usuario@empresaAAA.com.br',
-                                       indefinite: true, duration: nil, discount: 30.0)
+                                       discount_duration_undefined: true, discount_duration: nil, discount: 30.0)
     create(:partner_company, name: 'Empresa BBB', cnpj: '86.010.460/0001-16')
 
     login_as(user, scope: :user)
@@ -70,7 +70,7 @@ feature 'user view partner companies' do
 
     company = create(:partner_company, name: 'Empresa AAA', cnpj: '90.530.299/0001-89',
                                        address: 'Av. Jabaquara, 1000', email: 'usuario@empresaAAA.com.br',
-                                       indefinite: false, duration: 12, discount: 30.0)
+                                       discount_duration_undefined: false, discount_duration: 12, discount: 30.0)
     create(:partner_company, name: 'Empresa BBB', cnpj: '86.010.460/0001-16')
 
     login_as(user, scope: :user)

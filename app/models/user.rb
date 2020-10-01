@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :partner_companies, dependent: :destroy
+  has_one :partner_company, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

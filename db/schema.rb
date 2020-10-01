@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 2020_09_30_205024) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false
     t.decimal "discount"
-    t.integer "duration"
-    t.boolean "indefinite", default: false
+    t.integer "discount_duration"
+    t.boolean "discount_duration_undefined", default: false
     t.index ["cnpj"], name: "index_partner_companies_on_cnpj", unique: true
     t.index ["user_id"], name: "index_partner_companies_on_user_id"
   end

@@ -22,5 +22,13 @@ describe PartnerCompany do
       expect(company.errors[:email]).to include('não pode ficar em branco')
       expect(company.errors[:user]).to include('é obrigatório(a)')
     end
+
+    it 'cnpj must be valid' do
+      company = build(:partner_company, cnpj: '49.44')
+
+      company.valid?
+
+      expect(company.errors[:cnpj]).to include('não é válido')
+    end
   end
 end

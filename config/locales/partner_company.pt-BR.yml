@@ -12,7 +12,15 @@ pt-BR:
         address: Endereço
         email: Email
         discount: Desconto
-        duration: Duração
-        indefinite: Indefinido
+        discount_duration: Prazo
+        discount_duration_undefined: Prazo Indefinido
         user: Funcionário responsável
         user_id: Funcionário responsável
+  partner_companies:
+    index:
+      not_found: Nenhuma empresa parceira cadastrada
+    create:
+      successfull: Cadastro feito com sucesso
+    new:
+      duration_undefined: Prazo Indefinido
+      duration_defined: Prazo Definido

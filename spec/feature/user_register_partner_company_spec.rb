@@ -28,7 +28,7 @@ feature 'User register partner company' do
     expect(page).to have_content('34.761.358/0001-59')
     expect(page).to have_content('Av. Paulista, 1000')
     expect(page).to have_content('usuario@empresa1.com.br')
-    expect(page).to have_content('Empresa cadastrada com sucesso')
+    expect(page).to have_content('Cadastro feito com sucesso')
     expect(page).to have_content('30%')
     expect(page).to have_content('Indefinido')
   end
@@ -46,14 +46,14 @@ feature 'User register partner company' do
     fill_in 'Email', with: 'usuario@empresa1.com.br'
     fill_in 'Desconto', with: '30'
     choose 'Prazo Definido'
-    fill_in 'Duração', with: '12'
+    fill_in 'Prazo', with: '12'
     click_on 'Cadastrar'
 
     expect(page).to have_content('Empresa 1')
     expect(page).to have_content('34.761.358/0001-59')
     expect(page).to have_content('Av. Paulista, 1000')
     expect(page).to have_content('usuario@empresa1.com.br')
-    expect(page).to have_content('Empresa cadastrada com sucesso')
+    expect(page).to have_content('Cadastro feito com sucesso')
     expect(page).to have_content('30%')
     expect(page).to have_content('12 meses')
   end
@@ -71,7 +71,7 @@ feature 'User register partner company' do
     fill_in 'Email', with: 'usuario@empresa1.com.br'
     fill_in 'Desconto', with: '30'
     choose 'Prazo Definido'
-    fill_in 'Duração', with: '12'
+    fill_in 'Prazo', with: '12'
     choose 'Prazo Indefinido'
     click_on 'Cadastrar'
 
@@ -79,10 +79,10 @@ feature 'User register partner company' do
     expect(page).to have_content('34.761.358/0001-59')
     expect(page).to have_content('Av. Paulista, 1000')
     expect(page).to have_content('usuario@empresa1.com.br')
-    expect(page).to have_content('Empresa cadastrada com sucesso')
+    expect(page).to have_content('Cadastro feito com sucesso')
     expect(page).to have_content('30%')
     expect(page).to have_content('Indefinido')
-    expect(PartnerCompany.last.duration).to eq nil
+    expect(PartnerCompany.last.discount_duration).to eq nil
   end
 
   scenario 'fields cannot be blank' do
