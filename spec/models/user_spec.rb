@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'contains @espertofit.com.br' do
-      user = create(:user, email: 'test@espertofit.com.br')
+      user = build(:user, email: 'test@espertofit.com.br')
 
       expect(user.save).to be_truthy
     end
