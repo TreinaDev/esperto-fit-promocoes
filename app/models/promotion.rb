@@ -5,6 +5,6 @@ class Promotion < ApplicationRecord
   private
 
   def generate_token
-    self.token = "PROMO-#{SecureRandom.alphanumeric(3)}"
+    self.token = "PROMO-#{SecureRandom.alphanumeric(3).upcase}"
   end
 end
