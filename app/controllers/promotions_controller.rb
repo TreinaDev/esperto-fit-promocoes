@@ -25,7 +25,7 @@ class PromotionsController < ApplicationController
 
   def promotion_params
     params.require(:promotion)
-          .permit(:name, :description, :discount_rate, :expire_date, :coupon_quantity)
+          .permit(:name, :description, :token, :discount_rate, :expire_date, :coupon_quantity)
   end
 
   def authorize_admin

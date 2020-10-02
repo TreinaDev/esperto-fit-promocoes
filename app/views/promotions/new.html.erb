@@ -4,6 +4,10 @@
     <%= f.text_field :name %>
   </div>
   <div>
+    <%= f.label :token %>
+    <%= f.text_field :token, min:6, max:10, placeholder: 'De 6 a 10 caracteres' %>
+  </div>
+  <div>
     <%= f.label :description %>
     <%= f.text_area :description %>
   </div>

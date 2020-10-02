@@ -12,4 +12,4 @@ pt-BR:
         discount_rate: Percentual de desconto
         coupon_quantity: Número máximo de uso
         expire_date: Período de validade
-        token: Código
+        token: Código da promoção
