@@ -1,4 +1,8 @@
 <div>
+  <%= link_to 'Cadastrar CPF', new_partner_company_partner_company_employee_path(@partner_company) %>
+</div>
+
+<div>
   <ul>
     <li> <%= "#{PartnerCompany.human_attribute_name(:name)}: #{@partner_company.name}" %> </li>
     <li> <%= "#{PartnerCompany.human_attribute_name(:cnpj)}: #{@partner_company.cnpj}" %> </li>
