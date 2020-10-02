@@ -19,6 +19,12 @@ ActiveRecord::Schema.define(version: 2020_10_01_191034) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.decimal "discount"
+    t.integer "discount_duration"
+    t.boolean "discount_duration_undefined", default: false
+    t.index ["cnpj"], name: "index_partner_companies_on_cnpj", unique: true
+    t.index ["user_id"], name: "index_partner_companies_on_user_id"
   end
 
   create_table "partner_company_employees", force: :cascade do |t|
@@ -56,5 +62,6 @@ ActiveRecord::Schema.define(version: 2020_10_01_191034) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "partner_companies", "users"
   add_foreign_key "partner_company_employees", "partner_companies"
 end
