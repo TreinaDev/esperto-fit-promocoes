@@ -1,6 +1,6 @@
 class PartnerCompany < ApplicationRecord
   belongs_to :user
-  has_many :partner_company_employees
+  has_many :partner_company_employees, dependent: :destroy
 
   validates :name, :cnpj, :address, :email, presence: true
   validates :cnpj, uniqueness: true
