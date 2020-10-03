@@ -3,6 +3,7 @@ class Promotion < ApplicationRecord
   validates :token, :name, :discount_rate, :description, :coupon_quantity, :expire_date, presence: true
   validates :discount_rate, :coupon_quantity, numericality: { greater_than: 0, message: 'deve ser positivo' }
   validate :expire_date_must_be_future
+  validates :token, length: { in: 6..10, message: 'precisa ser entre 6 e 10 caracteres' }
 
   private
 

@@ -14,6 +14,7 @@ class PromotionsController < ApplicationController
 
   def create
     @promotion = Promotion.new(promotion_params)
+    @promotion.token.upcase!
     if @promotion.save
       redirect_to @promotion, notice: 'Promoção cadastrada com sucesso!'
     else

@@ -37,5 +37,21 @@ describe Promotion, type: :model do
 
       expect(promotion.errors[:expire_date]).to include('precisa ser uma data futura')
     end
+
+    context 'token must be between 6 and 10 characters' do
+      it 'cannot be less than 6' do
+        promotion = build(:promotion, token: 'PROMO')
+        promotion.valid?
+
+        expect(promotion.errors[:token]).to include('precisa ser entre 6 e 10 caracteres')
+      end
+
+      it 'cannot be more than 10' do
+        promotion = build(:promotion, token: 'PROMOCAONATAL25')
+        promotion.valid?
+
+        expect(promotion.errors[:token]).to include('precisa ser entre 6 e 10 caracteres')
+      end
+    end
   end
 end
