@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 feature 'Promotion' do
-  let(:admin) do
-    create(:user, admin: true)
-  end
+  let(:admin) { create(:user, admin: true) }
 
   scenario 'is registered by admin' do
     login_as admin

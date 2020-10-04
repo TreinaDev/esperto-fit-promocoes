@@ -2,9 +2,9 @@
 
 <% @promotions.each do |promotion| %>
 <div>
-<p>
-<b><%= link_to promotion.name, promotion %> - Desconto:<%= promotion.discount_rate%><br/>
-Expira dia <%=promotion.expire_date%></b>
-</p> 
+  <p>
+  <b><%= link_to promotion.name, promotion %> - Desconto:<%= promotion.discount_rate%><br/>
+  Expira dia <%=promotion.expire_date%></b>
+  </p> 
 </div>
 <%end%>

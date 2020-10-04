@@ -15,11 +15,9 @@ class PromotionsController < ApplicationController
   def create
     @promotion = Promotion.new(promotion_params)
     @promotion.token.upcase!
-    if @promotion.save
-      redirect_to @promotion, notice: 'Promoção cadastrada com sucesso!'
-    else
-      render :new
-    end
+    return redirect_to @promotion, notice: 'Promoção cadastrada com sucesso!' if @promotion.save
+
+    render :new
   end
 
   private
@@ -27,9 +25,5 @@ class PromotionsController < ApplicationController
   def promotion_params
     params.require(:promotion)
           .permit(:name, :description, :token, :discount_rate, :expire_date, :coupon_quantity)
-  end
-
-  def authorize_admin
-    redirect_to root_path, notice: 'Você não tem permissão para essa ação' unless current_user.admin?
   end
 end
