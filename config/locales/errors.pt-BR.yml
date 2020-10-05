@@ -1,0 +1,6 @@
+---
+pt-BR:
+  errors:
+    messages:
+      greater_than_zero: deve ser positivo
+      expire_date_must_be_future: precisa ser uma data futura
