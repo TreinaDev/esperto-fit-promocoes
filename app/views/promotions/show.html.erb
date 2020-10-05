@@ -6,5 +6,6 @@
   <dd><%= number_to_percentage(@promotion.discount_rate, separator: ',', precision: 1) %> de desconto</dd><br/>
   <dd>Usar até <%= @promotion.coupon_quantity%> vezes </dd><br/>
   <dd>Expira em <%= l @promotion.expire_date %></dd><br/>
+  <dd><%= link_to 'Emitir cupons', new_promotion_coupon_path(@promotion) %></dd>
   </dl>
 </div>

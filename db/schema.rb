@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_01_191034) do
+ActiveRecord::Schema.define(version: 2020_10_05_212031) do
+
+  create_table "coupons", force: :cascade do |t|
+    t.string "token"
+    t.integer "promotion_id", null: false
+    t.integer "coupon_number"
+    t.integer "use_counter"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["promotion_id"], name: "index_coupons_on_promotion_id"
+  end
 
   create_table "partner_companies", force: :cascade do |t|
     t.string "name"
@@ -62,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_10_01_191034) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "coupons", "promotions"
   add_foreign_key "partner_companies", "users"
   add_foreign_key "partner_company_employees", "partner_companies"
 end
