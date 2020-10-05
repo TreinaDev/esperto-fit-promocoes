@@ -1,0 +1,10 @@
+<div>
+  <dl>
+  <dt><%= @promotion.name %></dt> - <%= Promotion.human_attribute_name(:token) %> <%= @promotion.token%><br/>
+  <p>
+  <dd><%= @promotion.description %><dd><br/>
+  <dd><%= number_to_percentage(@promotion.discount_rate, separator: ',', precision: 1) %> de desconto</dd><br/>
+  <dd>Usar até <%= @promotion.coupon_quantity%> vezes </dd><br/>
+  <dd>Expira em <%= l @promotion.expire_date %></dd><br/>
+  </dl>
+</div>

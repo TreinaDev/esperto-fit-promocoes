@@ -5,5 +5,7 @@ Rails.application.routes.draw do
     resources :partner_company_employees, only: [:index, :new, :create]
   end
 
+  resources :promotions, only: %i[index show create new]
+  #resources :partner_companies, only: %i[index show new create]
 end
 

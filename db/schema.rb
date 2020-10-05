@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 2020_10_02_202129) do
     t.index ["partner_company_id"], name: "index_partner_company_employees_on_partner_company_id"
   end
 
+  create_table "promotions", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.decimal "discount_rate"
+    t.integer "coupon_quantity"
+    t.date "expire_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "token"
+    t.index ["token"], name: "index_promotions_on_token", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
