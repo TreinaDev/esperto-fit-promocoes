@@ -31,6 +31,24 @@ class PartnerCompanyEmployeesController < ApplicationController
     end
 
     redirect_to partner_company_partner_company_employees_path(@partner_company),
-                notice: "#{file_content.length - invalid_cpfs.length} CPFs cadastrados com sucesso"
+                notice: success_message(invalid_cpfs, file_content),
+                alert: error_message(invalid_cpfs)
+  end
+
+  private
+
+  def success_message(invalid_cpfs, total_cpfs)
+    "#{total_cpfs.length - invalid_cpfs.length} CPF(s) cadastrado(s) com sucesso"
+  end
+
+  def error_message(invalid_cpfs)
+    return if invalid_cpfs.empty?
+
+    message = 'CPF(s) inválido(s): '
+    invalid_cpfs.each do |cpf|
+      message += cpf
+      message += ' '
+    end
+    message
   end
 end

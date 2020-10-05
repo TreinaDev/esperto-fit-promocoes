@@ -13,12 +13,13 @@ feature 'User register cpf of partner company employee' do
     attach_file 'Selecione o arquivo', Rails.root.join('spec/support/empresa_teste_cpfs.txt')
     click_on 'Cadastrar'
 
-    expect(page).to have_content('4 CPFs cadastrados com sucesso')
+    expect(page).to have_content('4 CPF(s) cadastrado(s) com sucesso')
     expect(page).to have_content('Funcionários de Empresa teste')
     expect(page).to have_content('013.942.940-93')
     expect(page).to have_content('963.036.880-39')
     expect(page).to have_content('922.467.600-62')
     expect(page).to have_content('574.097.590-54')
+    expect(page).not_to have_content('CPF(s) inválido(s):')
   end
 
   scenario 'must attach a file' do
@@ -63,8 +64,8 @@ feature 'User register cpf of partner company employee' do
     attach_file 'Selecione o arquivo', Rails.root.join('spec/support/empresa_teste_cpfs.txt')
     click_on 'Cadastrar'
 
-    expect(page).to have_content('3 CPFs cadastrados com sucesso')
-    # expect(page).to have_content('013.942.940-93 inválido(s)')
+    expect(page).to have_content('3 CPF(s) cadastrado(s) com sucesso')
+    expect(page).to have_content('CPF(s) inválido(s): 013.942.940-93')
     expect(page).to have_content('963.036.880-39')
     expect(page).to have_content('922.467.600-62')
     expect(page).to have_content('574.097.590-54')
