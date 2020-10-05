@@ -43,14 +43,14 @@ describe Promotion, type: :model do
         promotion = build(:promotion, token: 'PROMO')
         promotion.valid?
 
-        expect(promotion.errors[:token]).to include('precisa ser entre 6 e 10 caracteres')
+        expect(promotion.errors[:token]).to include('é muito curto (mínimo: 6 caracteres)')
       end
 
       it 'cannot be more than 10' do
         promotion = build(:promotion, token: 'PROMOCAONATAL25')
         promotion.valid?
 
-        expect(promotion.errors[:token]).to include('precisa ser entre 6 e 10 caracteres')
+        expect(promotion.errors[:token]).to include('é muito longo (máximo: 10 caracteres)')
       end
     end
   end
