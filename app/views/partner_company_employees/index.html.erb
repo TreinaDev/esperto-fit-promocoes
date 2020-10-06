@@ -1,0 +1,7 @@
+<h3> Funcionários de <%= @partner_company.name %> </h3>
+
+<ul>
+  <% @partner_company_employees.each do |partner_company_employee| %>
+    <li> <%= partner_company_employee.cpf %> </li>
+  <% end %>
+</ul>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_01_191034) do
+ActiveRecord::Schema.define(version: 2020_10_02_202129) do
 
   create_table "partner_companies", force: :cascade do |t|
     t.string "name"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2020_10_01_191034) do
     t.integer "partner_company_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["cpf"], name: "index_partner_company_employees_on_cpf", unique: true
     t.index ["partner_company_id"], name: "index_partner_company_employees_on_partner_company_id"
   end
 
