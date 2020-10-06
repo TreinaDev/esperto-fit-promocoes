@@ -12,7 +12,7 @@ feature 'Promotion' do
     fill_in 'Nome', with: 'Promoção de natal'
     fill_in 'Descrição', with: 'Faça matrícula no período de natal e ganhe atendimento com nutricionista por um mês.'
     fill_in 'Percentual de desconto', with: 100
-    fill_in 'Número máximo de uso', with: 50
+    fill_in 'Número de cupons', with: 50
     fill_in 'Código da promoção', with: 'PROMONAT'
     fill_in 'Período de validade', with: '13/01/2021'
     click_on 'Enviar'
@@ -38,7 +38,7 @@ feature 'Promotion' do
     expect(page).to have_content 'Promoção de natal'
     expect(page).to have_content 'Faça matrícula no período de natal e ganhe atendimento com nutricionista por um mês.'
     expect(page).to have_content '100,0% de desconto'
-    expect(page).to have_content '50'
+    expect(page).to have_content '10'
     expect(page).to have_content '09/09/2024'
     expect(promo.token).to be_present
     expect(page).to have_content promo.token
@@ -53,7 +53,7 @@ feature 'Promotion' do
     fill_in 'Nome', with: 'Promoção de natal'
     fill_in 'Descrição', with: 'Faça matrícula no período de natal e ganhe atendimento com nutricionista por um mês.'
     fill_in 'Percentual de desconto', with: 100
-    fill_in 'Número máximo de uso', with: 50
+    fill_in 'Número de cupons', with: 50
     fill_in 'Código da promoção', with: 'promonat10'
     fill_in 'Período de validade', with: '13/01/2021'
     click_on 'Enviar'

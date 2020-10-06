@@ -1,0 +1,6 @@
+<%= "#{@promotion.name} - #{@promotion.token}"%><br/>
+<div>
+  <% @coupons.each do |coupon| %>
+  <b><%= coupon.token %></b><br/>
+  <% end %>
+</div>

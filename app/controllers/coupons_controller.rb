@@ -1,6 +1,6 @@
 class CouponsController < ApplicationController
-  def new
-    @promotion = Promotion.find(params[:id])
-    @coupon = Coupon.new
+  def index
+    @promotion = Promotion.find(params[:promotion_id])
+    @coupons = Coupon.where(promotion_id: @promotion)
   end
 end
