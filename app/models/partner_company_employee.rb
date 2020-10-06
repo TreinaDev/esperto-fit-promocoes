@@ -4,6 +4,8 @@ class PartnerCompanyEmployee < ApplicationRecord
   validate :cpf_validation
   validates :cpf, uniqueness: true
 
+  private
+
   def cpf_validation
     return if CPF.valid?(cpf)
 
