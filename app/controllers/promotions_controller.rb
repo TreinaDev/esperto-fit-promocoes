@@ -25,7 +25,7 @@ class PromotionsController < ApplicationController
     @coupons = []
     (1..@promotion.coupon_quantity).each do |i|
       @coupons << Coupon.create!(promotion_id: @promotion.id, coupon_number: i,
-                                 use_counter: 1, token: "#{@promotion.token}#{i.to_s.rjust(3, '0')}")
+                                 token: "#{@promotion.token}#{i.to_s.rjust(3, '0')}")
     end
     @promotion.update!(coupon_quantity: (@promotion.coupon_quantity - @coupons.length))
     redirect_to promotion_coupons_path(@promotion), notice: 'Cupons emitidos com sucesso'
@@ -40,6 +40,7 @@ class PromotionsController < ApplicationController
 
   def promotion_params
     params.require(:promotion)
-          .permit(:name, :description, :token, :discount_rate, :expire_date, :coupon_quantity)
+          .permit(:name, :description, :token, :discount_rate,
+                  :expire_date, :coupon_quantity, :monthly_duration)
   end
 end

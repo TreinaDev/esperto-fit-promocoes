@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_05_212031) do
+ActiveRecord::Schema.define(version: 2020_10_07_215938) do
 
   create_table "coupons", force: :cascade do |t|
     t.string "token"
     t.integer "promotion_id", null: false
     t.integer "coupon_number"
-    t.integer "use_counter"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["promotion_id"], name: "index_coupons_on_promotion_id"
@@ -54,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_10_05_212031) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "token"
+    t.integer "monthly_duration"
     t.index ["token"], name: "index_promotions_on_token", unique: true
   end
 

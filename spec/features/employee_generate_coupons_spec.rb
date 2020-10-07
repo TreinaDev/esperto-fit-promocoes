@@ -32,6 +32,7 @@ feature 'user creates coupons' do
 
     expect(promotion.coupon_quantity).to eq 0
   end
+
   scenario 'disable emission button for zero coupon quantity promotions' do
     create(:promotion, coupon_quantity: 0)
     user = create(:user)
@@ -42,5 +43,40 @@ feature 'user creates coupons' do
     click_on 'Promoção de natal'
 
     expect(page).not_to have_link('Emitir cupons')
+  end
+
+  scenario 'enable coupons list button after emission' do
+    promotion = create(:promotion, coupon_quantity: 0)
+    create(:coupon, promotion: promotion)
+    user = create(:user)
+    login_as user
+
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Promoção de natal'
+
+    expect(page).to have_link('Ver cupons emitidos')
+    expect(page).not_to have_link('Emitir cupons')
+  end
+
+  scenario 'view emitted coupons' do
+    create(:promotion, token: 'PROMONAT')
+    user = create(:user)
+    login_as user
+
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Promoção de natal'
+    click_on 'Emitir cupons'
+    click_on 'Voltar'
+    click_on 'Ver cupons emitidos'
+
+    expect(page).to have_content('PROMONAT001')
+    expect(page).to have_content('PROMONAT005')
+    expect(page).to have_content('PROMONAT001')
+    expect(page).to have_content('PROMONAT010')
+    expect(page).not_to have_content('PROMONAT000')
+    expect(page).not_to have_content('PROMONAT011')
+    expect(page).to have_content('Promoção de natal')
   end
 end

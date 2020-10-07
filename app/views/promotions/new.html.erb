@@ -16,6 +16,10 @@
     <%= f.number_field :discount_rate %>
   </div>
   <div>
+    <%= f.label :monthly_duration %>
+    <%= f.number_field :monthly_duration, min: 1 %>
+  </div>
+  <div>
     <%= f.label :coupon_quantity %>
     <%= f.number_field :coupon_quantity %>
   </div>
