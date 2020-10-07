@@ -23,4 +23,17 @@ class PartnerCompany < ApplicationRecord
     end
     invalid_cpfs
   end
+
+  def remove_employee(cpf_list)
+    invalid_cpfs = []
+    cpf_list.uniq!
+    cpf_list.each do |cpf|
+      if (cpf_to_remove = PartnerCompanyEmployee.find_by(cpf: cpf.strip))
+        PartnerCompanyEmployee.destroy(cpf_to_remove.id)
+      else
+        invalid_cpfs << cpf.strip
+      end
+    end
+    invalid_cpfs
+  end
 end
