@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 feature 'User deletes partner compnay employees' do
+  scenario 'must be logged in to delete cpfs' do
+    company = create(:partner_company)
+
+    visit partner_company_partner_company_employee_remove_form_path(company)
+
+    expect(current_path).to eq new_user_session_path
+  end
+
   scenario 'successfully' do
     user = create(:user)
     company = create(:partner_company)

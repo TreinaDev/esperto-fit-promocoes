@@ -1,4 +1,5 @@
 class PartnerCompanyEmployeesController < ApplicationController
+  before_action :authenticate_user!, only: %i[index new remove_form]
   before_action :must_attach_file, only: %i[create remove_cpfs]
   before_action :file_must_have_content, only: %i[create remove_cpfs]
 

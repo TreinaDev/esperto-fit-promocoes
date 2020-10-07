@@ -1,6 +1,21 @@
 require 'rails_helper'
 
 feature 'User register cpf of partner company employee' do
+  scenario 'must be logged in to register form' do
+    company = create(:partner_company)
+    visit new_partner_company_partner_company_employee_path(company)
+
+    expect(current_path).to eq new_user_session_path
+  end
+
+  scenario 'must be logged in to view registered CPFs' do
+    company = create(:partner_company)
+
+    visit partner_company_partner_company_employees_path(company)
+
+    expect(current_path).to eq new_user_session_path
+  end
+
   scenario 'successfully' do
     user = create(:user)
     create(:partner_company, name: 'Empresa teste')
