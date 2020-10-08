@@ -9,4 +9,12 @@ Rails.application.routes.draw do
       
   end
   resources :promotions, only: %i[index show create new]
+
+  namespace :api do
+    namespace :v1 do
+      resources :partner_companies do
+        get 'search', on: :collection
+      end
+    end
+  end
 end

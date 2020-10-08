@@ -29,12 +29,15 @@ class PartnerCompany < ApplicationRecord
     cpf_list.uniq!
     cpf_list.each do |cpf|
       cpf_to_remove = PartnerCompanyEmployee.find_by(cpf: cpf.strip)
-      if cpf_to_remove.present?
-        cpf_to_remove.destroy
-      else
-        invalid_cpfs << cpf.strip
-      end
+      invalid_cpfs << cpf.strip if cpf_to_remove.blank?
+      cpf_to_remove.destroy if cpf_to_remove.present?
     end
     invalid_cpfs
+  end
+
+  def format_discount_duration
+    return 'Indefinido' if discount_duration_undefined
+
+    discount_duration.to_s
   end
 end
