@@ -20,14 +20,9 @@ class PromotionsController < ApplicationController
   end
 
   def emission
-    return render status: :precondition_failed, json: 'Emissão de cupons indisponível' if @available
+    return render status: :precondition_failed, json: 'Emissão de cupons indisponível' unless @promotion.available?
 
-    @coupons = []
-    @promotion.coupon_quantity.times do |i|
-      @coupons << Coupon.create!(promotion_id: @promotion.id, coupon_number: i + 1,
-                                 token: "#{@promotion.token}#{(i + 1).to_s.rjust(3, '0')}")
-    end
-    @promotion.update!(coupon_quantity: (@promotion.coupon_quantity - @coupons.length))
+    @promotion.generate_coupons!
     redirect_to promotion_coupons_path(@promotion), notice: 'Cupons emitidos com sucesso'
   end
 
@@ -35,7 +30,6 @@ class PromotionsController < ApplicationController
 
   def set_promotion
     @promotion = Promotion.find(params[:id])
-    @available = @promotion.coupon_quantity.zero?
   end
 
   def promotion_params

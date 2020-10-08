@@ -7,7 +7,7 @@
   <dd><%=Promotion.human_attribute_name(:coupon_quantity)%>: <%= @promotion.coupon_quantity%></dd><br/>
   <dd>Expira em <%= l @promotion.expire_date %></dd><br/>
   <dd><%= Promotion.human_attribute_name(:monthly_duration) %>: <%=@promotion.monthly_duration%></dd><br/>
-  <% if @promotion.coupon_quantity > 0 %>
+  <% if @promotion.available? %>
     <dd><%= link_to 'Emitir cupons', emission_promotion_path(@promotion), method: :post %></dd>
   <% else %>
     <dd><%= link_to 'Ver cupons emitidos', promotion_coupons_path(@promotion) %></dd>
