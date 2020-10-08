@@ -1,7 +1,7 @@
 <h3> Remove CPF em lote </h3>
 
-  <%= form_with url: partner_company_partner_company_employee_remove_cpfs_path(params[:partner_company_id]),
-                local: true do |form| %>
+  <%= form_with url: remove_cpfs_partner_company_partner_company_employees_path(params[:partner_company_id]),
+                     local: true do |form| %>
     <%= form.label :file_content, 'Selecione o arquivo' %>
     <%= form.file_field :file_content %>
 
