@@ -1,6 +1,7 @@
 class PartnerCompanyEmployeesController < ApplicationController
-  before_action :must_attach_file, only: [:create]
-  before_action :file_must_have_content, only: [:create]
+  before_action :authenticate_user!, only: %i[index new remove_form]
+  before_action :must_attach_file, only: %i[create remove_cpfs]
+  before_action :file_must_have_content, only: %i[create remove_cpfs]
 
   def index
     @partner_company = PartnerCompany.find(params[:partner_company_id])
@@ -13,14 +14,28 @@ class PartnerCompanyEmployeesController < ApplicationController
     invalid_cpfs = @partner_company.add_employee(@file_content)
 
     redirect_to partner_company_partner_company_employees_path(@partner_company),
-                notice: success_message(invalid_cpfs, @file_content),
+                notice: add_success_message(invalid_cpfs, @file_content),
+                alert: error_message(invalid_cpfs)
+  end
+
+  def remove_form; end
+
+  def remove_cpfs
+    invalid_cpfs = @partner_company.remove_employee(@file_content)
+
+    redirect_to partner_company_partner_company_employees_path(@partner_company),
+                notice: remove_success_message(invalid_cpfs, @file_content),
                 alert: error_message(invalid_cpfs)
   end
 
   private
 
-  def success_message(invalid_cpfs, total_cpfs)
+  def add_success_message(invalid_cpfs, total_cpfs)
     "#{total_cpfs.length - invalid_cpfs.length} CPF(s) cadastrado(s) com sucesso"
+  end
+
+  def remove_success_message(invalid_cpfs, total_cpfs)
+    "#{total_cpfs.length - invalid_cpfs.length} CPF(s) removido(s) com sucesso"
   end
 
   def error_message(invalid_cpfs)
@@ -44,7 +59,7 @@ class PartnerCompanyEmployeesController < ApplicationController
 
   def file_must_have_content
     @partner_company = PartnerCompany.find(params[:partner_company_id])
-    @file_content = params[:file_content].read.split("\n")
+    @file_content = params[:file_content].read.split(/[\r\n]+/)
     return unless @file_content.empty?
 
     redirect_to new_partner_company_partner_company_employee_path(@partner_company),
