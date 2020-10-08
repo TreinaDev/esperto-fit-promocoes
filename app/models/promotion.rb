@@ -1,4 +1,5 @@
 class Promotion < ApplicationRecord
+  has_many :coupons, dependent: :destroy
   validates :token, uniqueness: true
   validates :token, :name, :discount_rate, :description, :coupon_quantity, :expire_date, presence: true
   validates :discount_rate, :coupon_quantity, numericality: { greater_than_or_equal_to: 0, message: :greater_than_zero }
