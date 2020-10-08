@@ -1,0 +1,8 @@
+<h3> Cadastro CPF em lote </h3>
+
+  <%= form_with url: partner_company_partner_company_employees_path(params[:partner_company_id]),local: true do |form| %>
+    <%= form.label :file_content, t('.attach_file') %>
+    <%= form.file_field :file_content %>
+
+    <%= form.submit 'Cadastrar' %>
+<% end %>

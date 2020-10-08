@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_10_07_215938) do
     t.integer "partner_company_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["cpf"], name: "index_partner_company_employees_on_cpf", unique: true
     t.index ["partner_company_id"], name: "index_partner_company_employees_on_partner_company_id"
   end
 

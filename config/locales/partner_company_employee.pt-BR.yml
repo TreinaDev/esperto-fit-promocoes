@@ -1,0 +1,20 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      partner_company_employee:
+        one: Funcionário da empresa parceira
+    attributes:
+      partner_company_employee:
+        cpf: CPF
+        partner_company: Empresa Parceira
+        partner_company_id: Empresa Parceira
+  partner_company_employees:
+    new:
+      attach_file: Selecione o arquivo
+    create:
+      attach_text_file: Selecione um arquivo de texto
+      empty_file: Arquivo vazio. Selecione arquivo com conteúdo
+    remove_cpfs:
+      attach_text_file: Selecione um arquivo de texto
+      empty_file: Arquivo vazio. Selecione arquivo com conteúdo
