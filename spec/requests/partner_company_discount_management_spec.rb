@@ -35,7 +35,7 @@ describe 'Partner Company discount management' do
 
     response_json = JSON.parse(response.body)
 
-    expect(response).to have_http_status(200)
+    expect(response).to have_http_status(404)
     expect(response.content_type).to include('application/json')
     expect(response_json).to be_empty
   end

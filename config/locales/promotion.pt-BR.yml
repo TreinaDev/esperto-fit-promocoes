@@ -10,6 +10,7 @@ pt-BR:
         name: Nome
         description: Descrição
         discount_rate: Percentual de desconto
-        coupon_quantity: Número máximo de uso
+        coupon_quantity: Cupons disponíveis
         expire_date: Período de validade
+        monthly_duration: Número de mensalidade(s)
         token: Código da promoção

@@ -6,9 +6,13 @@ Rails.application.routes.draw do
       get 'remove_form', on: :collection
       post 'remove_cpfs', on: :collection
     end
-      
   end
-  resources :promotions, only: %i[index show create new]
+
+  resources :promotions, only: %i[index create new]
+  resources :promotions, only: %i[show] do
+    post 'emission', on: :member
+    resources :coupons
+  end 
 
   namespace :api do
     namespace :v1 do
