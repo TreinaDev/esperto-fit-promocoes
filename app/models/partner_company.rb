@@ -25,14 +25,13 @@ class PartnerCompany < ApplicationRecord
   end
 
   def remove_employee(cpf_list)
-    invalid_cpfs = []
     cpf_list.uniq!
-    cpf_list.each do |cpf|
+    cpf_list.filter_map do |cpf|
       cpf_to_remove = PartnerCompanyEmployee.find_by(cpf: cpf.strip)
-      invalid_cpfs << cpf.strip if cpf_to_remove.blank?
-      cpf_to_remove.destroy if cpf_to_remove.present?
+      cpf_to_remove.destroy && next if cpf_to_remove.present?
+
+      cpf.strip
     end
-    invalid_cpfs
   end
 
   def format_discount_duration
