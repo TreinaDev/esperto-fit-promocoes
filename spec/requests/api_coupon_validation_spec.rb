@@ -51,5 +51,12 @@ describe 'Coupon API' do
       expect(response).to have_http_status(:not_found)
       expect(response.body).to include('Cupom não encontrado')
     end
+
+    it 'blank' do
+      get api_v1_path(token: ' ')
+
+      expect(response).to have_http_status(:not_found)
+      expect(response.body).to include('Cupom não encontrado')
+    end
   end
 end

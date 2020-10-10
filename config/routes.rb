@@ -20,7 +20,3 @@ Rails.application.routes.draw do
     end
   end
 end
-#/api/v1/coupons/XUZHJAS
-#get ‘coupons/:token’, to: ‘coupons#token’
-
-#get 'rentals/search', to: 'rentals#search'
