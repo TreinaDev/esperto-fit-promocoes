@@ -33,7 +33,9 @@ CPF válido mas não cadastrado
 **HTTP status:** 404
 
 ```json
-[]
+[
+"Nenhum desconto para esse CPF"
+]
 ```
 
 #### GET /api/v1/partner_companies/search
@@ -44,7 +46,7 @@ Enviado sem conteúdo
 
 ```json
 [
-"CPF não presente"
+"CPF inválido"
 ]
 ```
 

@@ -29,7 +29,7 @@ describe 'Partner Company discount management' do
     expect(response_json[:name]).to eq('EmpresaA')
     expect(response_json[:id]).to eq(partner_company.id)
   end
-  it 'cannot find cpf and returns no content' do
+  it 'cannot find cpf' do
     create(:partner_company, discount: 30, discount_duration_undefined: true, name: 'EmpresaA')
     get '/api/v1/partner_companies/search?q=513.361.067-00'
 
@@ -37,7 +37,7 @@ describe 'Partner Company discount management' do
 
     expect(response).to have_http_status(404)
     expect(response.content_type).to include('application/json')
-    expect(response_json).to be_empty
+    expect(response_json).to include('Nenhum desconto para esse CPF')
   end
   it 'invalid params' do
     get '/api/v1/partner_companies/search'
@@ -46,7 +46,7 @@ describe 'Partner Company discount management' do
 
     expect(response).to have_http_status(412)
     expect(response.content_type).to include('application/json')
-    expect(response_json).to include('CPF não presente')
+    expect(response_json).to include('CPF inválido')
   end
   it 'is not a valid cpf' do
     get '/api/v1/partner_companies/search?q=513361067001'
