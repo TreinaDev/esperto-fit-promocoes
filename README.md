@@ -11,32 +11,39 @@
 **HTTP status:** 200
 
 ```json
-[
-  {
-    "id": 1,
-    "available": "Cupom válido",
-    "discount_rate": "100.0",
-    "monthly_duration": "6",
-    "expire_date": "09/09/2024",
-    "promotion": "Promoção de natal"
-  }
-]
+
+{
+  "available": "Cupom válido",
+  "discount_rate": "100.0",
+  "monthly_duration": "6",
+  "expire_date_formatted": "09/09/2024",
+  "promotion": "Promoção de natal"
+}
+
 ```
 
 ```json
-[
-  {
-    "available": "Cupom expirado"
-  }
-]
+
+{ 
+  "available": "Cupom expirado",
+  "discount_rate": "100.0",
+  "monthly_duration": "6",
+  "expire_date_formatted": "09/09/2024",
+  "promotion": "Promoção de natal"
+}
+
 ```
 
 ```json
-[
-  {
-    "available": "Cupom já utilizado"
-  }
-]
+
+{
+  "available": "Cupom já utilizado",
+  "discount_rate": "100.0",
+  "monthly_duration": "6",
+  "expire_date_formatted": "09/09/2024",
+  "promotion": "Promoção de natal"
+}
+
 ```
 
 **HTTP status:** 404

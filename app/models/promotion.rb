@@ -16,6 +16,10 @@ class Promotion < ApplicationRecord
     end
   end
 
+  def expire_date_formatted
+    expire_date.strftime('%d/%m/%Y')
+  end
+
   def available?
     !coupon_quantity.zero?
   end
