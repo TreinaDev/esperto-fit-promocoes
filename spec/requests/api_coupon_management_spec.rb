@@ -58,4 +58,32 @@ describe 'Coupon API' do
       expect(response.body).to include('Cupom não encontrado')
     end
   end
+
+  context 'burn' do
+    it 'succesfully' do
+      coupon = create(:coupon, token: 'PROMONAT001')
+
+      post '/api/v1/coupon_burn', params: { token: 'PROMONAT001' }
+      coupon.reload
+
+      expect(coupon.consumed).to eq true
+      expect(response).to be_ok
+    end
+
+    it 'empty params' do
+      post '/api/v1/coupon_burn', params: {}
+
+      body = JSON.parse(response.body, symbolize_names: true)
+      expect(response).to have_http_status(412)
+      expect(body[:message]).to include('Token inválido')
+    end
+
+    it 'invalid params' do
+      post '/api/v1/coupon_burn', params: { token: 'PROMOBF001' }
+
+      body = JSON.parse(response.body, symbolize_names: true)
+      expect(response).to have_http_status(412)
+      expect(body[:message]).to include('Token inválido')
+    end
+  end
 end

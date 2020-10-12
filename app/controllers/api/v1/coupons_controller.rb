@@ -7,4 +7,13 @@ class Api::V1::CouponsController < Api::V1::ApiController
   rescue ActiveRecord::RecordNotFound
     render status: :not_found, json: { message: 'Cupom não encontrado' }
   end
+
+  def burn
+    @coupon = Coupon.find_by(token: params[:token])
+    return render json: { message: 'Token inválido' }, status: :precondition_failed if @coupon.blank?
+
+    @coupon.consumed = true
+    @coupon.save
+    render status: :ok
+  end
 end
