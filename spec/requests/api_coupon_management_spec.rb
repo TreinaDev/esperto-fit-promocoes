@@ -3,9 +3,9 @@ require 'rails_helper'
 describe 'Coupon API' do
   context 'validation' do
     it 'successfully' do
-      coupon = create(:coupon)
+      coupon = create(:coupon, token: 'PROMONIVER001')
 
-      get api_v1_path(coupon)
+      get api_v1_path(coupon.token)
 
       expect(response).to have_http_status(:ok)
       body = JSON.parse(response.body, symbolize_names: true)
@@ -21,7 +21,7 @@ describe 'Coupon API' do
       coupon = create(:coupon)
 
       travel_to Time.zone.local(2025, 10, 1, 12, 30, 45) do
-        get api_v1_path(coupon)
+        get api_v1_path(coupon.token)
       end
 
       expect(response).to have_http_status(:ok)
@@ -34,7 +34,7 @@ describe 'Coupon API' do
     it 'coupon already consumed' do
       coupon = create(:coupon, consumed: true)
 
-      get api_v1_path(coupon)
+      get api_v1_path(coupon.token)
 
       expect(response).to have_http_status(:ok)
       body = JSON.parse(response.body, symbolize_names: true)
