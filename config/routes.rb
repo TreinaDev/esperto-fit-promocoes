@@ -13,9 +13,11 @@ Rails.application.routes.draw do
     post 'emission', on: :member
     resources :coupons
   end 
+  resources :partner_companies, only: %i[index show new create]
 
-  namespace :api do
+  namespace :api, constraints: { format: :json } do
     namespace :v1 do
+      get 'coupons/:token', to: 'coupons#show'
       resources :partner_companies do
         get 'search', on: :collection
       end
