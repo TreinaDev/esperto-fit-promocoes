@@ -7,10 +7,18 @@ Rails.application.routes.draw do
       post 'remove_cpfs', on: :collection
     end
   end
-  resources :promotions, only: %i[index show create new]
+
+  resources :promotions, only: %i[index create new]
   resources :promotions, only: %i[show] do
     post 'emission', on: :member
     resources :coupons
   end 
-  resources :partner_companies, only: %i[index show new create]
+
+  namespace :api do
+    namespace :v1 do
+      resources :partner_companies do
+        get 'search', on: :collection
+      end
+    end
+  end
 end

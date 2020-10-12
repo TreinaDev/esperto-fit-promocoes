@@ -1,24 +1,52 @@
-# README
+## API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Consulta de CPF (/api/v1/partner_companies/search?q=CPF)
 
-Things you may want to cover:
+#### GET /api/v1/partner_companies/search?q=816.125.298-01
 
-* Ruby version
+**HTTP status:** 200
 
-* System dependencies
+```json
+{
+"id": 1,
+"name": "Empresa1",
+"discount": "30.0",
+"format_discount_duration": "12"
+}
+```
+#### GET /api/v1/partner_companies/search?q=81612529801
 
-* Configuration
+CPF fora de formatação
 
-* Database creation
+**HTTP status:** 412
 
-* Database initialization
+```json
+[
+"CPF inválido"
+]
+```
 
-* How to run the test suite
+#### GET /api/v1/partner_companies/search?q=204.276.440-03
 
-* Services (job queues, cache servers, search engines, etc.)
+CPF válido mas não cadastrado
 
-* Deployment instructions
+**HTTP status:** 404
 
-* ...
+```json
+[
+"Nenhum desconto para esse CPF"
+]
+```
+
+#### GET /api/v1/partner_companies/search
+
+Enviado sem conteúdo
+
+**HTTP status:** 412
+
+```json
+[
+"CPF inválido"
+]
+```
+

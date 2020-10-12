@@ -33,4 +33,10 @@ class PartnerCompany < ApplicationRecord
       cpf.strip
     end
   end
+
+  def format_discount_duration
+    return 'Indefinido' if discount_duration_undefined
+
+    discount_duration.to_s
+  end
 end
