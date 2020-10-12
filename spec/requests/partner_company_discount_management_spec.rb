@@ -33,28 +33,28 @@ describe 'Partner Company discount management' do
     create(:partner_company, discount: 30, discount_duration_undefined: true, name: 'EmpresaA')
     get '/api/v1/partner_companies/search?q=513.361.067-00'
 
-    response_json = JSON.parse(response.body)
+    response_json = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to have_http_status(404)
     expect(response.content_type).to include('application/json')
-    expect(response_json).to include('Nenhum desconto para esse CPF')
+    expect(response_json[:message]).to include('Nenhum desconto para esse CPF')
   end
   it 'invalid params' do
     get '/api/v1/partner_companies/search'
 
-    response_json = JSON.parse(response.body)
+    response_json = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to have_http_status(412)
     expect(response.content_type).to include('application/json')
-    expect(response_json).to include('CPF inválido')
+    expect(response_json[:message]).to include('CPF inválido')
   end
   it 'is not a valid cpf' do
     get '/api/v1/partner_companies/search?q=513361067001'
 
-    response_json = JSON.parse(response.body)
+    response_json = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to have_http_status(412)
     expect(response.content_type).to include('application/json')
-    expect(response_json).to include('CPF inválido')
+    expect(response_json[:message]).to include('CPF inválido')
   end
 end
