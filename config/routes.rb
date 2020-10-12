@@ -8,11 +8,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :single_coupons, only: %i[index show new create]
+
   resources :promotions, only: %i[index create new]
   resources :promotions, only: %i[show] do
     post 'emission', on: :member
     resources :coupons
-  end 
+  end
+
   resources :partner_companies, only: %i[index show new create]
 
   namespace :api, constraints: { format: :json } do

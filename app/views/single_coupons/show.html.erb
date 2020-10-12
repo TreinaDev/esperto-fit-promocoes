@@ -1,0 +1,13 @@
+<div>
+  <dl>
+  <dt> <%= Promotion.human_attribute_name(:token) %> <%= @single_coupon.token%><br/>
+  <p>
+  <dd> <%= number_to_percentage(@single_coupon.discount_rate, separator: ',', precision: 1) %> de desconto</dd><br/>
+  <dd>Expira em <%= l @single_coupon.expire_date %> </dd><br/>
+  <dd> <%= Promotion.human_attribute_name(:monthly_duration) %>: <%=@single_coupon.monthly_duration%> </dd><br/>
+  </dl>
+</div>
+
+<div>
+  <%= link_to 'Voltar', single_coupons_path %>
+</div>

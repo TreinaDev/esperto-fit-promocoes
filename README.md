@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 * Deployment instructions
 
 * ...
@@ -55,7 +54,6 @@
 }
 
 ```
-=======
 ## API
 
 ### Consulta de CPF (/api/v1/partner_companies/search?q=CPF)
@@ -108,4 +106,3 @@ Enviado sem conteúdo
 ]
 ```
 
->>>>>>> eb4e7df25b5cae31e8a444ed402c375e720844d0

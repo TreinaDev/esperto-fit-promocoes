@@ -1,6 +1,7 @@
 <%= link_to 'Empresas Parceiras', partner_companies_path %>
 <% if user_signed_in? %>
-  <%= link_to 'Promoções', promotions_path %>
+  <%= link_to 'Promoções', promotions_path %><br/>
+  <%= link_to 'Cupons avulsos', single_coupons_path %><br/>
   <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
 <% else %>
   <%= link_to 'Entrar', new_user_session_path %>
