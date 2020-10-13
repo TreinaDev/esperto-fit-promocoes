@@ -8,14 +8,14 @@ create(:partner_company_employee, cpf: '279.270.153-62', partner_company: partne
 promo_niver = create(:promotion, name: 'Promoção de aniversário',
                                  description: 'Ganhe 20% de desconto na matrícula no mês de aniversário Esperto Fit.',
                                  discount_rate: 20, coupon_quantity: 2, monthly_duration: 1,
-                                 expire_date: Date.parse('09/11/2020'),
+                                 expire_date: Date.parse('09/11/2030'),
                                  token: 'PROMONIVER')
 create(:coupon, token: 'PROMONIVER001', promotion: promo_niver)
 create(:coupon, token: 'PROMONIVER002', promotion: promo_niver)
 promo_verao = create(:promotion, name: 'Promoção de verão',
                                  description: 'Ganhe 10% de desconto em produtos das filiais.',
                                  discount_rate: 10, coupon_quantity: 2, monthly_duration: 2,
-                                 expire_date: Date.parse('09/10/2020'),
+                                 expire_date: Date.parse('09/10/2030'),
                                  token: 'PROMOVERAO')
 create(:coupon, token: 'PROMOVERAO001', promotion: promo_verao)
 create(:coupon, token: 'PROMOVERAO002', promotion: promo_verao)

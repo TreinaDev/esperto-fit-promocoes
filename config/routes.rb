@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :partner_companies do
         get 'search', on: :collection
       end
+      post 'coupon_burn', to: 'coupons#burn'
     end
   end
 end

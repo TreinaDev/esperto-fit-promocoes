@@ -3,9 +3,9 @@ require 'rails_helper'
 describe 'Coupon API' do
   context 'validation' do
     it 'successfully' do
-      coupon = create(:coupon)
+      coupon = create(:coupon, token: 'PROMONIVER001')
 
-      get api_v1_path(coupon)
+      get api_v1_path(coupon.token)
 
       expect(response).to have_http_status(:ok)
       body = JSON.parse(response.body, symbolize_names: true)
@@ -21,7 +21,7 @@ describe 'Coupon API' do
       coupon = create(:coupon)
 
       travel_to Time.zone.local(2025, 10, 1, 12, 30, 45) do
-        get api_v1_path(coupon)
+        get api_v1_path(coupon.token)
       end
 
       expect(response).to have_http_status(:ok)
@@ -34,7 +34,7 @@ describe 'Coupon API' do
     it 'coupon already consumed' do
       coupon = create(:coupon, consumed: true)
 
-      get api_v1_path(coupon)
+      get api_v1_path(coupon.token)
 
       expect(response).to have_http_status(:ok)
       body = JSON.parse(response.body, symbolize_names: true)
@@ -56,6 +56,44 @@ describe 'Coupon API' do
 
       expect(response).to have_http_status(:not_found)
       expect(response.body).to include('Cupom não encontrado')
+    end
+  end
+
+  context 'burn' do
+    it 'succesfully' do
+      coupon = create(:coupon, token: 'PROMONAT001', consumed: false)
+
+      post '/api/v1/coupon_burn', params: { token: 'PROMONAT001' }
+      coupon.reload
+
+      expect(coupon.consumed).to eq true
+      expect(response).to be_ok
+    end
+
+    it 'empty params' do
+      post '/api/v1/coupon_burn', params: {}
+
+      body = JSON.parse(response.body, symbolize_names: true)
+      expect(response).to have_http_status(412)
+      expect(body[:message]).to include('Token inválido')
+    end
+
+    it 'invalid params' do
+      post '/api/v1/coupon_burn', params: { token: 'PROMOBF001' }
+
+      body = JSON.parse(response.body, symbolize_names: true)
+      expect(response).to have_http_status(412)
+      expect(body[:message]).to include('Token inválido')
+    end
+
+    it 'consumed coupon' do
+      create(:coupon, token: 'PROMONAT001', consumed: true)
+
+      post '/api/v1/coupon_burn', params: { token: 'PROMONAT001' }
+
+      body = JSON.parse(response.body, symbolize_names: true)
+      expect(response).to have_http_status(412)
+      expect(body[:message]).to include('Token inválido')
     end
   end
 end
