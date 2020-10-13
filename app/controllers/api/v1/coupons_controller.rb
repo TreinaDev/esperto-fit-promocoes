@@ -10,7 +10,10 @@ class Api::V1::CouponsController < Api::V1::ApiController
 
   def burn
     @coupon = Coupon.find_by!(consumed: false, token: params[:token])
+    return render status: :precondition_failed, json: { message: 'Token inválido' } if @coupon.date_expired?
+
     @coupon.consumed = true
+    @coupon.client_email = params[:email]
     @coupon.save
     render status: :ok
   rescue ActiveRecord::RecordNotFound
