@@ -22,9 +22,41 @@ feature 'Register single coupon' do
     expect(page).to have_link('Voltar')
   end
 
+  scenario 'and view only not expired coupons' do
+    user = create(:user)
+    create(:single_coupon, token: 'ANIVER251', expire_date: '09/09/2026')
+    create(:single_coupon, token: 'EXPIRED', expire_date: '13/10/2021', discount_rate: 65)
+
+    login_as user
+    visit root_path
+    travel_to Time.zone.local(2025, 10, 1, 12, 30, 45) do
+      click_on 'Cupons avulsos'
+    end
+
+    expect(page).to have_content('ANIVER251')
+    expect(page).not_to have_content('EXPIRED')
+    expect(page).not_to have_content('65,0%')
+  end
+
+  scenario 'and view only not used coupons' do
+    user = create(:user)
+    create_list(:single_coupon, 3)
+    create(:single_coupon, consumed: true, token: 'DONTSHOW', discount_rate: 65)
+
+    login_as user
+    visit root_path
+    click_on 'Cupons avulsos'
+
+    expect(page).to have_content('ANIVER251')
+    expect(page).to have_content('ANIVER252')
+    expect(page).to have_content('ANIVER253')
+    expect(page).not_to have_content('DONTSHOW')
+    expect(page).not_to have_content('65,0%')
+  end
+
   scenario 'view details' do
     user = create(:user)
-    create(:single_coupon)
+    create(:single_coupon, token: 'ANIVER251')
 
     login_as user
     visit root_path

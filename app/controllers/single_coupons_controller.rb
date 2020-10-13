@@ -1,6 +1,6 @@
 class SingleCouponsController < ApplicationController
   def index
-    @coupons = SingleCoupon.all
+    @coupons = SingleCoupon.where(consumed: false).where('expire_date >= ?', Date.current)
   end
 
   def show

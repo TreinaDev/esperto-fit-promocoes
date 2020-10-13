@@ -9,8 +9,13 @@ class Promotion < ApplicationRecord
   def generate_coupons!
     ActiveRecord::Base.transaction do
       coupon_quantity.times do |i|
+        token_str = "#{token}#{(i + 1).to_s.rjust(3, '0')}"
+        while SingleCoupon.exists?(token: token_str) || Coupon.exists?(token: token_str)
+          i += 1
+          token_str = "#{token}#{(i + 1).to_s.rjust(3, '0')}"
+        end
         Coupon.create!(promotion_id: id, coupon_number: i + 1,
-                       token: "#{token}#{(i + 1).to_s.rjust(3, '0')}")
+                       token: token_str)
       end
       update!(coupon_quantity: 0)
     end

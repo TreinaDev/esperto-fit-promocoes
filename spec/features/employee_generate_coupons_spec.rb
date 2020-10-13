@@ -79,4 +79,20 @@ feature 'user creates coupons' do
     expect(page).not_to have_content('PROMONAT011')
     expect(page).to have_content('Promoção de natal')
   end
+  scenario 'a single coupon has same token of a promotion coupon' do
+    create(:promotion, token: 'TESTES')
+    create(:single_coupon, token: 'TESTES003')
+    user = create(:user)
+    login_as user
+
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Promoção de natal'
+    click_on 'Emitir cupons'
+
+    expect(page).to have_content('TESTES001')
+    expect(page).to have_content('TESTES002')
+    expect(page).to have_content('TESTES011')
+    expect(page).not_to have_content('TESTES003')
+  end
 end
