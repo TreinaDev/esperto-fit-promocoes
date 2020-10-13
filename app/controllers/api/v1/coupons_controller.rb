@@ -9,7 +9,7 @@ class Api::V1::CouponsController < Api::V1::ApiController
   end
 
   def burn
-    @coupon = Coupon.find_by!(token: params[:token])
+    @coupon = Coupon.find_by!(consumed: false, token: params[:token])
     @coupon.consumed = true
     @coupon.save
     render status: :ok

@@ -61,7 +61,7 @@ describe 'Coupon API' do
 
   context 'burn' do
     it 'succesfully' do
-      coupon = create(:coupon, token: 'PROMONAT001')
+      coupon = create(:coupon, token: 'PROMONAT001', consumed: false)
 
       post '/api/v1/coupon_burn', params: { token: 'PROMONAT001' }
       coupon.reload
@@ -80,6 +80,16 @@ describe 'Coupon API' do
 
     it 'invalid params' do
       post '/api/v1/coupon_burn', params: { token: 'PROMOBF001' }
+
+      body = JSON.parse(response.body, symbolize_names: true)
+      expect(response).to have_http_status(412)
+      expect(body[:message]).to include('Token inválido')
+    end
+
+    it 'consumed coupon' do
+      create(:coupon, token: 'PROMONAT001', consumed: true)
+
+      post '/api/v1/coupon_burn', params: { token: 'PROMONAT001' }
 
       body = JSON.parse(response.body, symbolize_names: true)
       expect(response).to have_http_status(412)
