@@ -100,6 +100,21 @@ feature 'Promotion' do
     expect(page).to have_content('deve ser positivo', count: 2)
   end
 
+  scenario 'discount cannot be greater than hundred' do
+    create(:promotion)
+
+    login_as admin
+
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Promoção de natal'
+    click_on 'Editar promoção'
+    fill_in 'Percentual de desconto', with: '105'
+    click_on 'Enviar'
+
+    expect(page).to have_content('deve ser menor ou igual a 100', count: 1)
+  end
+
   scenario 'expire date cannot be past' do
     create(:promotion)
 
