@@ -1,6 +1,7 @@
 class PromotionsController < ApplicationController
-  before_action :authorize_admin, only: %i[new create]
-  before_action :set_promotion, only: %i[show emission]
+  before_action :authorize_admin, only: %i[new create edit]
+  before_action :set_promotion, only: %i[show edit update emission]
+  before_action :verify_emitted_coupons, only: %i[edit update]
   def index
     @promotions = Promotion.all
   end
@@ -13,10 +14,19 @@ class PromotionsController < ApplicationController
 
   def create
     @promotion = Promotion.new(promotion_params)
-    @promotion.token.upcase!
     return redirect_to @promotion, notice: 'Promoção cadastrada com sucesso!' if @promotion.save
 
     render :new
+  end
+
+  def edit; end
+
+  def update
+    if @promotion.update(promotion_params)
+      redirect_to @promotion, notice: 'Promoção editada com sucesso!'
+    else
+      render :edit
+    end
   end
 
   def emission
@@ -30,6 +40,10 @@ class PromotionsController < ApplicationController
 
   def set_promotion
     @promotion = Promotion.find(params[:id])
+  end
+
+  def verify_emitted_coupons
+    redirect_to root_path, notice: 'Você não tem permissão para essa ação' unless @promotion.coupons_emitted?
   end
 
   def promotion_params

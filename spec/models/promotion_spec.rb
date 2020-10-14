@@ -38,6 +38,13 @@ describe Promotion, type: :model do
       expect(promotion.errors[:coupon_quantity]).to include('deve ser positivo')
     end
 
+    it 'discount cannot be greater than hundred' do
+      promotion = build(:promotion, discount_rate: 105)
+      promotion.valid?
+
+      expect(promotion.errors[:discount_rate]).to include('deve ser menor ou igual a 100')
+    end
+
     it 'expire date cannot be past' do
       date = Date.parse('09/09/2020')
       promotion = build(:promotion, expire_date: date)

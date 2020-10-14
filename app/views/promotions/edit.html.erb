@@ -1,0 +1,5 @@
+<% @promotion.errors.full_messages.each do |message| %>
+  <p><%= message %></p>
+<% end %>
+
+<%= render partial: 'form', locals: { promotion: @promotion } %>

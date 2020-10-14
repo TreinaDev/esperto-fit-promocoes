@@ -84,6 +84,5 @@ feature 'Register single coupon' do
     click_on 'Gerar cupom'
 
     expect(page).to have_content('não pode ficar em branco', count: 4)
-    
   end
 end

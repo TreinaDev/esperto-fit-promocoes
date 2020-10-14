@@ -7,6 +7,12 @@ feature 'user view partner companies' do
     expect(current_path).to eq new_user_session_path
   end
 
+  scenario 'must be logged in to click on empresas parceiras' do
+    visit root_path
+
+    expect(page).not_to have_content('Empresas Parceiras')
+  end
+
   scenario 'successfully view index' do
     user = create(:user)
 

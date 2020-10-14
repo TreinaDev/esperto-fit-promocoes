@@ -17,4 +17,8 @@ class Coupon < ApplicationRecord
   def unique_token_across_promotion_single
     errors.add(:token, :taken) if SingleCoupon.exists?(token: token)
   end
+
+  scope :applicable, lambda {
+    Coupon.joins(:promotion).where('promotions.expire_date >= ?', Date.current).where(consumed: false)
+  }
 end

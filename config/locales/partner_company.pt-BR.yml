@@ -24,3 +24,8 @@ pt-BR:
     new:
       duration_undefined: Prazo Indefinido
       duration_defined: Prazo Definido
+    update:
+      successfull: Atualização feita com sucesso
+    form:
+      duration_undefined: Prazo Indefinido
+      duration_defined: Prazo Definido

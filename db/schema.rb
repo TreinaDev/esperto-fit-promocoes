@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2020_10_14_193227) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "consumed", default: false
+    t.string "client_email"
     t.index ["promotion_id"], name: "index_coupons_on_promotion_id"
   end
 
