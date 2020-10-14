@@ -63,10 +63,11 @@ describe 'Coupon API' do
     it 'succesfully' do
       coupon = create(:coupon, token: 'PROMONAT001', consumed: false)
 
-      post '/api/v1/coupon_burn', params: { token: 'PROMONAT001' }
+      post '/api/v1/coupon_burn', params: { token: 'PROMONAT001', email: 'client1@email.com' }
       coupon.reload
 
       expect(coupon.consumed).to eq true
+      expect(coupon.client_email).to eq 'client1@email.com'
       expect(response).to be_ok
     end
 
@@ -74,6 +75,7 @@ describe 'Coupon API' do
       post '/api/v1/coupon_burn', params: {}
 
       body = JSON.parse(response.body, symbolize_names: true)
+
       expect(response).to have_http_status(412)
       expect(body[:message]).to include('Token inválido')
     end
@@ -82,6 +84,7 @@ describe 'Coupon API' do
       post '/api/v1/coupon_burn', params: { token: 'PROMOBF001' }
 
       body = JSON.parse(response.body, symbolize_names: true)
+
       expect(response).to have_http_status(412)
       expect(body[:message]).to include('Token inválido')
     end
@@ -92,6 +95,21 @@ describe 'Coupon API' do
       post '/api/v1/coupon_burn', params: { token: 'PROMONAT001' }
 
       body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(412)
+      expect(body[:message]).to include('Token inválido')
+    end
+
+    it 'coupon expired' do
+      promotion = create(:promotion, expire_date: Date.parse('09/09/2024'))
+      coupon = create(:coupon, promotion: promotion)
+
+      travel_to Time.zone.local(2025, 10, 1, 12, 30, 45) do
+        post '/api/v1/coupon_burn', params: { token: coupon.token }
+      end
+
+      body = JSON.parse(response.body, symbolize_names: true)
+
       expect(response).to have_http_status(412)
       expect(body[:message]).to include('Token inválido')
     end

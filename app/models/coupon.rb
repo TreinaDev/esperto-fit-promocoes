@@ -12,4 +12,8 @@ class Coupon < ApplicationRecord
   def date_expired?
     promotion.expire_date.past?
   end
+
+  scope :applicable, lambda {
+    Coupon.joins(:promotion).where('promotions.expire_date >= ?', Date.current).where(consumed: false)
+  }
 end
