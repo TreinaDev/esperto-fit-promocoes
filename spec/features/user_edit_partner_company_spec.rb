@@ -37,7 +37,7 @@ feature 'edit partner company' do
   end
 
   scenario 'successfully change to indefinite duration' do
-    user = create(:user)
+    user = create(:user, email: 'teste20@espertofit.com.br')
     create(:partner_company, name: 'teste1', cnpj: '72.951.663/0001-00', address: 'Av. Paulista, 1000',
                              email: 'teste1@teste1.com.br', discount_duration: 12,
                              discount: 30, discount_duration_undefined: false)
@@ -57,7 +57,7 @@ feature 'edit partner company' do
     expect(page).to have_content('teste1@teste1.com.br')
     expect(page).to have_content('Av. Jabaquara, 1000')
     expect(page).to have_content('10%')
-    expect(page).to have_content(user.email)
+    expect(page).to have_content('teste20@espertofit.com.br')
     expect(page).to have_content('Indefinido')
     expect(page).not_to have_content('Av. Paulista, 1000')
   end
