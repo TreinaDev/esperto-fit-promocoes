@@ -8,15 +8,7 @@ class Promotion < ApplicationRecord
 
   def generate_coupons!
     ActiveRecord::Base.transaction do
-      coupon_quantity.times do |i|
-        token_str = "#{token}#{(i + 1).to_s.rjust(3, '0')}"
-        while SingleCoupon.exists?(token: token_str) || Coupon.exists?(token: token_str)
-          i += 1
-          token_str = "#{token}#{(i + 1).to_s.rjust(3, '0')}"
-        end
-        Coupon.create!(promotion_id: id, coupon_number: i + 1,
-                       token: token_str)
-      end
+      create_coupons
       update!(coupon_quantity: 0)
     end
   end
@@ -27,6 +19,25 @@ class Promotion < ApplicationRecord
 
   def available?
     !coupon_quantity.zero?
+  end
+
+  def full_token(number)
+    "#{token}#{(number + 1).to_s.rjust(3, '0')}"
+  end
+
+  def token_already_exists?(token)
+    SingleCoupon.exists?(token: token) || Coupon.exists?(token: token)
+  end
+
+  def create_coupons
+    coupon_quantity.times do |number|
+      full_token = full_token(number)
+      while token_already_exists?(full_token)
+        number += 1
+        full_token = full_token(number)
+      end
+      Coupon.create!(promotion_id: id, coupon_number: number + 1, token: full_token)
+    end
   end
 
   private

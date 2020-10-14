@@ -21,6 +21,7 @@ describe Promotion, type: :model do
 
       expect(promotion2.errors[:token]).to include('já está em uso')
     end
+
     it 'token must be unique among single coupons' do
       create(:single_coupon, token: 'IGUAL10')
       coupon2 = build(:coupon, token: 'IGUAL10')
