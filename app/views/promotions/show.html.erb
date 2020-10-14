@@ -1,3 +1,5 @@
+<%= link_to 'Editar promoção', edit_promotion_path(@promotion) if @promotion.coupon_quantity!= 0 %>
+
 <div>
   <dl>
   <dt><%= @promotion.name %></dt> - <%= Promotion.human_attribute_name(:token) %> <%= @promotion.token%><br/>

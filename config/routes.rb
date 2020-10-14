@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :promotions, only: %i[index create new]
+  resources :promotions, only: %i[index create new edit update]
   resources :promotions, only: %i[show] do
     post 'emission', on: :member
     resources :coupons
