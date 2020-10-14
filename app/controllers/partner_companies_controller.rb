@@ -27,8 +27,7 @@ class PartnerCompaniesController < ApplicationController
 
   def update
     @partner_company = PartnerCompany.find(params[:id])
-    @partner_company.update(partner_company_params)
-    @partner_company.user = current_user
+    @partner_company.assign_attributes(**partner_company_params, user: current_user)
     @partner_company.discount_duration = nil if  @partner_company.discount_duration_undefined?
     return redirect_to @partner_company, notice: t('.successfull') if @partner_company.save
 
