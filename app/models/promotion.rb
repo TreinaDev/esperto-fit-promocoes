@@ -6,6 +6,7 @@ class Promotion < ApplicationRecord
   validates :discount_rate, numericality: { less_than_or_equal_to: 100 }
   validate :expire_date_must_be_future
   validates :token, length: { in: 6..10 }
+  before_save :upcase_token
 
   def generate_coupons!
     ActiveRecord::Base.transaction do
@@ -25,11 +26,19 @@ class Promotion < ApplicationRecord
     !coupon_quantity.zero?
   end
 
+  def coupons_emitted?
+    coupon_quantity != 0
+  end
+
   private
 
   def expire_date_must_be_future
     return unless expire_date.present? && expire_date < Date.current
 
     errors.add(:expire_date, :expire_date_must_be_future)
+  end
+
+  def upcase_token
+    self.token = token.upcase
   end
 end

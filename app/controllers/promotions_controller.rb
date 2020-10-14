@@ -14,7 +14,6 @@ class PromotionsController < ApplicationController
 
   def create
     @promotion = Promotion.new(promotion_params)
-    @promotion.token.upcase!
     return redirect_to @promotion, notice: 'Promoção cadastrada com sucesso!' if @promotion.save
 
     render :new
@@ -24,8 +23,6 @@ class PromotionsController < ApplicationController
 
   def update
     if @promotion.update(promotion_params)
-      @promotion.token.upcase!
-      @promotion.save
       redirect_to @promotion, notice: 'Promoção editada com sucesso!'
     else
       render :edit
@@ -46,7 +43,7 @@ class PromotionsController < ApplicationController
   end
 
   def verify_emitted_coupons
-    redirect_to root_path, notice: 'Você não tem permissão para essa ação' unless @promotion.coupon_quantity != 0
+    redirect_to root_path, notice: 'Você não tem permissão para essa ação' unless @promotion.coupons_emitted?
   end
 
   def promotion_params
