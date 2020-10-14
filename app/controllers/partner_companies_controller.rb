@@ -1,5 +1,5 @@
 class PartnerCompaniesController < ApplicationController
-  before_action :authenticate_user!, only: %i[index show new create]
+  before_action :authenticate_user!, only: %i[index show new create edit update]
 
   def index
     @partner_companies = PartnerCompany.all
@@ -19,6 +19,20 @@ class PartnerCompaniesController < ApplicationController
     return redirect_to @partner_company, notice: t('.successfull') if @partner_company.save
 
     render :new
+  end
+
+  def edit
+    @partner_company = PartnerCompany.find(params[:id])
+  end
+
+  def update
+    @partner_company = PartnerCompany.find(params[:id])
+    @partner_company.update(partner_company_params)
+    @partner_company.user = current_user
+    @partner_company.discount_duration = nil if  @partner_company.discount_duration_undefined?
+    return redirect_to @partner_company, notice: t('.successfull') if @partner_company.save
+
+    render :edit
   end
 
   private
