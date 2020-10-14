@@ -14,7 +14,7 @@ class SingleCouponsController < ApplicationController
   def create
     @coupon = SingleCoupon.new(single_coupon_params)
     @coupon.token.upcase!
-    return redirect_to @coupon if @coupon.save!
+    return redirect_to @coupon if @coupon.save
 
     render :new
   end
