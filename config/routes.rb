@@ -7,14 +7,13 @@ Rails.application.routes.draw do
       post 'remove_cpfs', on: :collection
     end
   end
-
+  resources :single_coupons, only: %i[index show new create]
   resources :promotions, only: %i[index create new edit update]
   resources :promotions, only: %i[show] do
     post 'emission', on: :member
     resources :coupons
-  end 
+  end
   resources :partner_companies, only: %i[index show new create]
-
   namespace :api, constraints: { format: :json } do
     namespace :v1 do
       get 'coupons/:token', to: 'coupons#show'

@@ -1,0 +1,36 @@
+<div>
+  <% if @coupon.errors.any? %>
+    <ul>
+      <% @coupon.errors.full_messages.each do |message| %>
+        <b><li><%= message %></li></b>
+      <%end%>
+    </ul>
+  <% end %>
+</div>
+
+<%= form_with model: @coupon, local: true do |form| %>
+  <div>
+    <%= form.label :token %>
+    <%= form.text_field :token, min: 6, max: 10%>
+  </div>
+  <div>
+    <%= form.label :discount_rate %>
+    <%= form.number_field :discount_rate, min: 0, max: 100 %>
+  </div>
+  <div>
+    <%= form.label :expire_date %>
+    <%= form.date_field :expire_date %>
+  </div>
+  <div>
+    <%= form.label :monthly_duration %>
+    <%= form.date_field :monthly_duration, min: 0 %>
+  </div>
+
+  <div>
+    <%= form.submit 'Gerar cupom'%>
+  </div>
+<% end %>
+
+<div>
+  <%= link_to 'Voltar', single_coupons_path %>
+</div>

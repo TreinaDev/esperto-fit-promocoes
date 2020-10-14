@@ -1,0 +1,14 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      single_coupon: 
+      one: Cupom avulso
+      other: Cupons avulsos
+    attributes:
+      single_coupon:
+        token: Código do cupom
+        discount_rate: Percentual de desconto
+        expire_date: Data de validade
+        monthly_duration: Número de mensalidade(s)
+        consumed: Cupom utilizado
