@@ -1,5 +1,5 @@
 class PartnerCompaniesController < ApplicationController
-  before_action :authenticate_user!, only: %i[index show new create edit update]
+  before_action :authenticate_user!, only: %i[index show new create edit update clients]
 
   def index
     @partner_companies = PartnerCompany.all
@@ -32,6 +32,10 @@ class PartnerCompaniesController < ApplicationController
     return redirect_to @partner_company, notice: t('.successfull') if @partner_company.save
 
     render :edit
+  end
+
+  def clients
+    @clients = Client.where(params[:id])
   end
 
   private

@@ -1,0 +1,5 @@
+<% @clients.each do |client| %>
+  <p><%= client.description %></p>
+<% end %>
+
+<p><%= 'Nenhum cliente com desconto' if @clients.blank? %></p>

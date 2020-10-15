@@ -21,4 +21,8 @@ class Client
     end
     clients
   end
+
+  def description
+    "#{name} - #{cpf} - #{email}"
+  end
 end
