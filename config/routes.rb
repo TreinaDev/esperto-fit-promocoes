@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :coupons
   end
   resources :partner_companies, only: %i[index show new create]
+
   namespace :api, constraints: { format: :json } do
     namespace :v1 do
       get 'coupons/:token', to: 'coupons#show'

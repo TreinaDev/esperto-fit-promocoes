@@ -19,4 +19,16 @@ class SingleCoupon < ApplicationRecord
   def unique_token_across_promotion_single
     errors.add(:token, :taken) if Coupon.exists?(token: token)
   end
+
+  def available
+    return 'Cupom expirado' if date_expired?
+
+    return 'Cupom já utilizado' if consumed?
+
+    'Cupom válido'
+  end
+
+  def expire_date_formatted
+    expire_date.strftime('%d/%m/%Y')
+  end
 end
