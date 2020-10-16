@@ -11,6 +11,10 @@
 </div>
 
 <div>
+  <%= link_to 'Clientes com Desconto', clients_partner_company_path(@partner_company) %>
+</div>
+
+<div>
   <ul>
     <li> <%= "#{PartnerCompany.human_attribute_name(:name)}: #{@partner_company.name}" %> </li>
     <li> <%= "#{PartnerCompany.human_attribute_name(:cnpj)}: #{@partner_company.cnpj}" %> </li>
