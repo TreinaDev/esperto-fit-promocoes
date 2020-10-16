@@ -47,4 +47,59 @@ describe 'Coupon API' do
       expect(response.body).to include('Cupom não encontrado')
     end
   end
+
+  context 'burn' do
+    it 'successfully' do
+      single_coupon = create(:single_coupon, token: 'AVULSO123', consumed: false)
+
+      post '/api/v1/coupon_burn', params: { token: 'AVULSO123', email: 'client1@email.com' }
+      single_coupon.reload
+
+      expect(single_coupon.consumed).to eq true
+      expect(single_coupon.client_email).to eq 'client1@email.com'
+      expect(response).to be_ok
+    end
+
+    it 'empty params' do
+      post '/api/v1/coupon_burn', params: {}
+
+      body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(412)
+      expect(body[:message]).to include('Token inválido')
+    end
+
+    it 'invalid params' do
+      post '/api/v1/coupon_burn', params: { token: 'AVULSO764' }
+
+      body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(412)
+      expect(body[:message]).to include('Token inválido')
+    end
+
+    it 'consumed coupon' do
+      create(:single_coupon, token: 'AVULSO123', consumed: true)
+
+      post '/api/v1/coupon_burn', params: { token: 'AVULSO123' }
+
+      body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(412)
+      expect(body[:message]).to include('Token inválido')
+    end
+
+    it 'coupon expired' do
+      single_coupon = create(:single_coupon, expire_date: Date.parse('09/09/2024'))
+
+      travel_to Time.zone.local(2025, 10, 1, 12, 30, 45) do
+        post '/api/v1/coupon_burn', params: { token: single_coupon.token }
+      end
+
+      body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(412)
+      expect(body[:message]).to include('Token inválido')
+    end
+  end
 end

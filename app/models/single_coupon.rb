@@ -31,4 +31,8 @@ class SingleCoupon < ApplicationRecord
   def expire_date_formatted
     expire_date.strftime('%d/%m/%Y')
   end
+
+  scope :applicable, lambda {
+    SingleCoupon.where('expire_date >= ?', Date.current).where(consumed: false)
+  }
 end
