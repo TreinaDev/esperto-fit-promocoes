@@ -27,8 +27,7 @@ describe 'Coupon API' do
       expect(response).to have_http_status(:ok)
       body = JSON.parse(response.body, symbolize_names: true)
       expect(body[:available]).to eq 'Cupom expirado'
-      expect(body).not_to include('100.0')
-      expect(body).not_to include('Promoção de natal')
+      expect(body[:promotion][:discount_rate]).to eq('100.0')
     end
 
     it 'coupon already consumed' do
@@ -39,7 +38,7 @@ describe 'Coupon API' do
       expect(response).to have_http_status(:ok)
       body = JSON.parse(response.body, symbolize_names: true)
       expect(body[:available]).to eq 'Cupom já utilizado'
-      expect(body).not_to include('100.0')
+      expect(body[:promotion][:discount_rate]).to eq('100.0')
     end
   end
 
