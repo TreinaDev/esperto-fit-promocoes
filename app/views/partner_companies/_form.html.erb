@@ -7,39 +7,43 @@
 <% end %>
 
 <%= form_with model: partner_company, local: true do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class='col-xl-3'>
+    <div class='form-group'>
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+      <%= form.label :cnpj %>
+      <%= form.text_field :cnpj, class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+      <%= form.label :address %>
+      <%= form.text_field :address, class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+      <%= form.label :email %>
+      <%= form.text_field :email, class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+      <%= form.label :discount %> <i> (porcentagem) </i>
+      <%= form.number_field :discount, class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+      <%= form.label :discount_duration_undefined, t('.duration_undefined'), value: true %>
+      <%= form.radio_button :discount_duration_undefined, true, value: true %>
+    </div>
+    <div class='form-group'>
+      <%= form.label :discount_duration_undefined, t('.duration_defined'), value: false %>
+      <%= form.radio_button :discount_duration_undefined, false, value: false, checked: true %>
+    </div>
+    <div id="discount_duration" class='form-group' >
+      <%= form.label :discount_duration %> <i> (meses) </i>
+      <%= form.number_field :discount_duration, class: 'form-control' %>
+    </div>
+    <div>
+      <%= form.submit 'Cadastrar' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :cnpj %>
-    <%= form.text_field :cnpj %>
-  </div>
-  <div>
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-  <div>
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-  <div>
-    <%= form.label :discount %> <i> (porcentagem) </i>
-    <%= form.number_field :discount %>
-  </div>
-  <div>
-    <%= form.label :discount_duration_undefined, t('.duration_undefined'), value: true %>
-    <%= form.radio_button :discount_duration_undefined, true, value: true %>
-  </div>
-  <div>
-    <%= form.label :discount_duration_undefined, t('.duration_defined'), value: false %>
-    <%= form.radio_button :discount_duration_undefined, false, value: false, checked: true %>
-  </div>
-  <div id="discount_duration" >
-    <%= form.label :discount_duration %> <i> (meses) </i>
-    <%= form.number_field :discount_duration %>
-  </div>
-  <%= form.submit 'Cadastrar' %>
 <% end %>
 
 <% content_for :custom_js do %>
