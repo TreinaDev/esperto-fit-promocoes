@@ -72,6 +72,92 @@ feature 'Promotion' do
     expect(page).to have_content '13/01/2021'
   end
 
+  scenario 'attributes cannot be blank (except monthly_duration)' do
+    login_as admin
+
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Cadastrar promoção'
+    click_on 'Enviar'
+
+    expect(page).to have_content('não pode ficar em branco', count: 6)
+  end
+
+  scenario 'token must be unique' do
+    create(:promotion, token: 'PROMONAT')
+
+    login_as admin
+
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Cadastrar promoção'
+    fill_in 'Código da promoção', with: 'PROMONAT'
+    click_on 'Enviar'
+
+    expect(page).to have_content('já está em uso', count: 1)
+  end
+
+  scenario 'discount and coupon quantity cannot be negative' do
+    login_as admin
+
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Cadastrar promoção'
+    fill_in 'Percentual de desconto', with: '-5'
+    fill_in 'Cupons disponíveis', with: '-20'
+    click_on 'Enviar'
+
+    expect(page).to have_content('deve ser positivo', count: 2)
+  end
+
+  scenario 'discount cannot be greater than hundred' do
+    login_as admin
+
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Cadastrar promoção'
+    fill_in 'Percentual de desconto', with: '105'
+    click_on 'Enviar'
+
+    expect(page).to have_content('deve ser menor ou igual a 100', count: 1)
+  end
+
+  scenario 'expire date cannot be past' do
+    login_as admin
+
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Cadastrar promoção'
+    fill_in 'Período de validade', with: '10/01/2019'
+    click_on 'Enviar'
+
+    expect(page).to have_content('precisa ser uma data futura', count: 1)
+  end
+
+  scenario 'token cannot be less than 6 characters' do
+    login_as admin
+
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Cadastrar promoção'
+    fill_in 'Código da promoção', with: 'PROMO'
+    click_on 'Enviar'
+
+    expect(page).to have_content('é muito curto (mínimo: 6 caracteres)', count: 1)
+  end
+
+  scenario 'token cannot be more than 10 characters' do
+    login_as admin
+
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Cadastrar promoção'
+    fill_in 'Código da promoção', with: 'PROMONATALINA'
+    click_on 'Enviar'
+
+    expect(page).to have_content('é muito longo (máximo: 10 caracteres)', count: 1)
+  end
+
   scenario 'cannot be created by non-admin' do
     user = create(:user)
 
