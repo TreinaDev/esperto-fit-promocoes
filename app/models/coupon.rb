@@ -2,6 +2,8 @@ class Coupon < ApplicationRecord
   belongs_to :promotion
   validate :unique_token_across_promotion_single
 
+  enum status: { usable: 0, consumed: 1, discarded: 2}
+
   def available
     return 'Cupom expirado' if date_expired?
 

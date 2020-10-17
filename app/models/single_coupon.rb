@@ -6,6 +6,8 @@ class SingleCoupon < ApplicationRecord
   validates :discount_rate, numericality: { greater_than_or_equal_to: 0, message: :greater_than_zero }
   validates :token, length: { in: 6..10 }
 
+  enum status: { usable: 0, consumed: 1, discarded: 2}
+
   def date_expired?
     expire_date.past?
   end

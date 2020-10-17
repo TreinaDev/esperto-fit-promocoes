@@ -9,10 +9,17 @@ Rails.application.routes.draw do
     end
   end
   resources :single_coupons, only: %i[index show new create]
+  resources :single_coupons, only: %i[index show] do
+    post 'discard', on: :member
+    post 'retrieve', on: :member
+  end
   resources :promotions, only: %i[index create new edit update]
   resources :promotions, only: %i[show] do
     post 'emission', on: :member
-    resources :coupons
+    resources :coupons do
+      post 'discard', on: :member
+      post 'retrieve', on: :member
+    end
   end
   resources :partner_companies, only: %i[index show new create]
 
