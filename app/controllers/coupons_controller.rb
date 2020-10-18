@@ -5,8 +5,10 @@ class CouponsController < ApplicationController
 
   def discard
     @coupon = Coupon.find(params[:id])
-    @coupon.update!(status: :discarded, 
-                    discard_user: current_user.social_name, 
+    return render :index, notice: 'Não é possível descartar um cupom em uso' if @coupon.consumed?
+
+    @coupon.update!(status: :discarded,
+                    discard_user: current_user.social_name,
                     discard_date: Date.current)
     render :index, notice: 'Cupom descartado'
   end
@@ -16,6 +18,7 @@ class CouponsController < ApplicationController
     @coupon.update!(status: :usable)
     render :index, notice: 'Cupom recuperado'
   end
+
   private
 
   def set_promotion_coupons
@@ -23,4 +26,3 @@ class CouponsController < ApplicationController
     @coupons = @promotion.coupons
   end
 end
-

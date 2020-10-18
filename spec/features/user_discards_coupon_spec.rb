@@ -4,13 +4,13 @@ feature 'Regular user discards a promotion coupon' do
   scenario 'successfully' do
     user = create(:user)
     login_as user
-    promotion = create(:promotion, coupon_quantity: 1)
+    create(:promotion, token: 'PROMONAT1', coupon_quantity: 1)
 
     visit root_path
     click_on 'Promoções'
     click_on 'Promoção de natal'
     click_on 'Emitir cupons'
-    travel_to Time.zone.local(2024, 05, 05, 12, 30, 45) do
+    travel_to Time.zone.local(2024, 0o5, 0o5, 12, 30, 45) do
       click_on 'Descartar'
     end
 
@@ -23,13 +23,13 @@ feature 'Regular user discards a promotion coupon' do
   scenario 'and undo the discard' do
     user = create(:user)
     login_as user
-    promotion = create(:promotion, coupon_quantity: 1, token: 'PROMONAT1')
+    create(:promotion, coupon_quantity: 1, token: 'PROMONAT1')
 
     visit root_path
     click_on 'Promoções'
     click_on 'Promoção de natal'
     click_on 'Emitir cupons'
-    travel_to Time.zone.local(2024, 05, 05, 12, 30, 45) do
+    travel_to Time.zone.local(2024, 0o5, 0o5, 12, 30, 45) do
       click_on 'Descartar'
       click_on 'Desfazer descarte'
     end
@@ -43,7 +43,7 @@ feature 'Regular user discards a promotion coupon' do
   scenario 'and discard again after undo' do
     user = create(:user)
     login_as user
-    promotion = create(:promotion, coupon_quantity: 1, token: 'PROMONAT1')
+    create(:promotion, coupon_quantity: 1, token: 'PROMONAT1')
 
     visit root_path
     click_on 'Promoções'
@@ -51,8 +51,8 @@ feature 'Regular user discards a promotion coupon' do
     click_on 'Emitir cupons'
     click_on 'Descartar'
     click_on 'Desfazer descarte'
-    travel_to Time.zone.local(2024, 05, 05, 12, 30, 45) do
-       click_on 'Descartar'
+    travel_to Time.zone.local(2024, 0o5, 0o5, 12, 30, 45) do
+      click_on 'Descartar'
     end
 
     expect(page).to have_content 'PROMONAT1001'

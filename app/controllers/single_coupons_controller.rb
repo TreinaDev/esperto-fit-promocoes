@@ -21,9 +21,11 @@ class SingleCouponsController < ApplicationController
 
   def discard
     @single_coupon = SingleCoupon.find(params[:id])
-    @single_coupon.update!(status: :discarded, 
-                    discard_user: current_user.social_name, 
-                    discard_date: Date.current)
+    return render :show, notice: 'Não é possível descartar um cupom em uso' if @single_coupon.consumed?
+
+    @single_coupon.update!(status: :discarded,
+                           discard_user: current_user.social_name,
+                           discard_date: Date.current)
     render :show, notice: 'Cupom descartado'
   end
 

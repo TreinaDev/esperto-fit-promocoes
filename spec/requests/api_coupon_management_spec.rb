@@ -31,7 +31,7 @@ describe 'Coupon API' do
     end
 
     it 'coupon already consumed' do
-      coupon = create(:coupon, consumed: true)
+      coupon = create(:coupon, status: :consumed)
 
       get api_v1_path(coupon.token)
 
@@ -39,6 +39,15 @@ describe 'Coupon API' do
       body = JSON.parse(response.body, symbolize_names: true)
       expect(body[:available]).to eq 'Cupom já utilizado'
       expect(body[:promotion][:discount_rate]).to eq('100.0')
+    end
+
+    it 'coupon discarded cannot appear' do
+      coupon = create(:coupon, status: :discarded)
+
+      get api_v1_path(coupon.token)
+
+      expect(response).to have_http_status(:not_found)
+      expect(response.body).to include 'Cupom não encontrado'
     end
   end
 
@@ -60,12 +69,12 @@ describe 'Coupon API' do
 
   context 'burn' do
     it 'succesfully' do
-      coupon = create(:coupon, token: 'PROMONAT001', consumed: false)
+      coupon = create(:coupon, token: 'PROMONAT001', status: :usable)
 
       post '/api/v1/coupon_burn', params: { token: 'PROMONAT001', email: 'client1@email.com' }
       coupon.reload
 
-      expect(coupon.consumed).to eq true
+      expect(coupon.consumed?).to eq true
       expect(coupon.client_email).to eq 'client1@email.com'
       expect(response).to be_ok
     end
@@ -89,7 +98,7 @@ describe 'Coupon API' do
     end
 
     it 'consumed coupon' do
-      create(:coupon, token: 'PROMONAT001', consumed: true)
+      create(:coupon, token: 'PROMONAT001', status: :consumed)
 
       post '/api/v1/coupon_burn', params: { token: 'PROMONAT001' }
 

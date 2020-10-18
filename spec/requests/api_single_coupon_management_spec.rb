@@ -30,6 +30,14 @@ describe 'Coupon API' do
       expect(body[:monthly_duration]).to eq 0
       expect(body[:expire_date_formatted]).to include('09/09/2022')
     end
+    it 'discarded single coupon cannot appear' do
+      single_coupon = create(:single_coupon, status: :discarded)
+
+      get api_v1_path(single_coupon.token)
+
+      expect(response).to have_http_status(:not_found)
+      expect(response.body).to include 'Cupom não encontrado'
+    end
   end
 
   context 'token' do

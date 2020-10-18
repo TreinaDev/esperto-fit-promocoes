@@ -1,10 +1,10 @@
 class Api::V1::CouponsController < Api::V1::ApiController
   def show
-    if Coupon.find_by(token: params[:token]).present?
-      @coupon = Coupon.find_by(token: params[:token])
+    if Coupon.not_discarded.find_by(token: params[:token]).present?
+      @coupon = Coupon.not_discarded.find_by(token: params[:token])
       render_coupon
     else
-      @coupon = SingleCoupon.find_by!(token: params[:token])
+      @coupon = SingleCoupon.not_discarded.find_by!(token: params[:token])
       render_single_coupon
     end
   rescue ActiveRecord::RecordNotFound
