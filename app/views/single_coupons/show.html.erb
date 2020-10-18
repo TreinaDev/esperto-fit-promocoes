@@ -5,6 +5,14 @@
   <dd> <%= number_to_percentage(@single_coupon.discount_rate, separator: ',', precision: 1) %> de desconto</dd><br/>
   <dd>Expira em <%= l @single_coupon.expire_date %> </dd><br/>
   <dd> <%= Promotion.human_attribute_name(:monthly_duration) %>: <%=@single_coupon.monthly_duration%> </dd><br/>
+  <% if @single_coupon.usable? %>
+    <dd> <%=link_to 'Descartar', discard_single_coupon_path(@single_coupon), method: :post%>
+     <% elsif @single_coupon.discarded?%>
+     descartado em <%= l @single_coupon.discard_date%> por <%= @single_coupon.discard_user%>
+     <%= link_to 'Desfazer descarte', retrieve_single_coupon_path(@single_coupon), method: :post %></b>
+     <% else %>
+     já foi consumido
+     <%end%></dd><br/>
   </dl>
 </div>
 
