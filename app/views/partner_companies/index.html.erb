@@ -1,16 +1,21 @@
-<div>
-  <%= link_to 'Cadastrar Empresa', new_partner_company_path %>
+<div class="text-center">
+  <%= link_to 'Cadastrar Empresa', new_partner_company_path, :class => "btn btn-outline-dark btn-lg" %>
 </div>
 
 <% if @partner_companies.empty? %>
   <h3> <%= t('.not_found') %> </h3>
 <% end %>
 
+<h3> Empresas parceiras cadastradas </h3>
 <div>
   <% @partner_companies.each do |company| %>
     <ul>
       <li> <%= link_to company.name, company %> </li>
     </ul>
   <% end %>
+</div>
+
+<div>
+  <%= link_to 'Voltar', root_path %>
 </div>
 

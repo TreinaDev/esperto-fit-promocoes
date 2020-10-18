@@ -1,0 +1,12 @@
+$custom-pink: #E6007E;
+$custom-pink-hover: #E6009E;
+
+.btn-custom {
+  background-color: $custom-pink;
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+    background-color: $custom-pink-hover;
+  }
+}
