@@ -2,13 +2,15 @@
   <%= link_to 'Cadastrar promoção', new_promotion_path, :class => "btn btn-outline-dark btn-lg" %>
 </div>
 
+<h1> Promoções </h1>
+
 <% @promotions.each do |promotion| %>
 <div>
   <ul>
     <li> <%= link_to promotion.name, promotion %> </li>
     <ul>
-      <li> Desconto: <%= promotion.discount_rate%> </li>
-      <li> Expira dia <%=promotion.expire_date%> </li>
+      <li> Desconto: <%= number_to_percentage(promotion.discount_rate, separator: ',', precision: 1) %> </li>
+      <li> Expira dia: <%= l promotion.expire_date%> </li>
     </ul>
   </ul>
 <% end %>
