@@ -12,7 +12,13 @@ class Api::V1::CouponsController < Api::V1::ApiController
   end
 
   def burn
-    @coupon = Coupon.applicable.find_by!(token: params[:token])
+    @coupon = Coupon.applicable.find_by(token: params[:token]).presence ||
+              SingleCoupon.applicable.find_by!(token: params[:token])
+    # @coupon = if Coupon.applicable.find_by(token: params[:token]).present?
+    #             Coupon.applicable.find_by(token: params[:token])
+    #           else
+    #             SingleCoupon.applicable.find_by!(token: params[:token])
+    #           end
     @coupon.consumed = true
     @coupon.client_email = params[:email]
     @coupon.save
