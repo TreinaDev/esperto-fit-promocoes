@@ -30,6 +30,14 @@ describe 'Coupon API' do
       expect(body[:monthly_duration]).to eq 0
       expect(body[:expire_date_formatted]).to include('09/09/2022')
     end
+    it 'discarded single coupon cannot appear' do
+      single_coupon = create(:single_coupon, status: :discarded)
+
+      get api_v1_path(single_coupon.token)
+
+      expect(response).to have_http_status(:not_found)
+      expect(response.body).to include 'Cupom não encontrado'
+    end
   end
 
   context 'token' do
@@ -50,13 +58,14 @@ describe 'Coupon API' do
 
   context 'burn' do
     it 'successfully' do
-      single_coupon = create(:single_coupon, token: 'AVULSO123', consumed: false)
+      single_coupon = create(:single_coupon, token: 'AVULSO123', status: :usable)
 
       post '/api/v1/coupon_burn', params: { token: 'AVULSO123', email: 'client1@email.com' }
+
       single_coupon.reload
 
-      expect(single_coupon.consumed).to eq true
       expect(single_coupon.client_email).to eq 'client1@email.com'
+      expect(single_coupon.status).to eq 'consumed'
       expect(response).to be_ok
     end
 
@@ -79,7 +88,7 @@ describe 'Coupon API' do
     end
 
     it 'consumed coupon' do
-      create(:single_coupon, token: 'AVULSO123', consumed: true)
+      create(:single_coupon, token: 'AVULSO123', status: :consumed)
 
       post '/api/v1/coupon_burn', params: { token: 'AVULSO123' }
 
