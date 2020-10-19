@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">
+    <%= image_tag('logo.png', class: 'logo') %>
+    <strong>Promotions</strong>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <% if user_signed_in? %>
+        <li class="nav-item <%= active_class?(promotions_path) %>">
+          <%= link_to 'Promoções', promotions_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item <%= active_class?(single_coupons_path) %>">
+          <%= link_to 'Cupons avulsos', single_coupons_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item <%= active_class?(partner_companies_path) %>">
+          <%= link_to 'Empresas Parceiras', partner_companies_path, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+        </li>
+      <% else %>
+        <li class="nav-item <%= active_class?(new_user_session_path) %>">
+          <%= link_to 'Entrar', new_user_session_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item <%= active_class?(new_user_registration_path) %>">
+          <%= link_to 'Criar conta', new_user_registration_path, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
