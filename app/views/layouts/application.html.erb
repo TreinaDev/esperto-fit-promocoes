@@ -12,7 +12,11 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+
+
+    <%= render 'layouts/shared/navbar' %>
     <%= yield %>
+
   </body>
     <%= yield :custom_js %>
 </html>

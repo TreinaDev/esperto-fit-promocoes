@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2020_10_18_001532) do
     t.integer "monthly_duration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "client_email"
     t.integer "status", default: 0
     t.date "discard_date"
     t.string "discard_user"

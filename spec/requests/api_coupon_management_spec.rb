@@ -73,7 +73,6 @@ describe 'Coupon API' do
 
       post '/api/v1/coupon_burn', params: { token: 'PROMONAT001', email: 'client1@email.com' }
       coupon.reload
-
       expect(coupon.consumed?).to eq true
       expect(coupon.client_email).to eq 'client1@email.com'
       expect(response).to be_ok

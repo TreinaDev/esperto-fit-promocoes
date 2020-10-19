@@ -1,3 +1,9 @@
+<ul>
+  <% @promotion.errors.full_messages.each do |message| %>
+    <b><li><%= message %></li></b>
+  <%end%>
+</ul>
+
 <%= form_with model: promotion, local: true do |f| %>
   <div class='col-xl-2'>
     <div class='form-group'>

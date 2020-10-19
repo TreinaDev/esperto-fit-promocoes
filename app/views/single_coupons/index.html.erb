@@ -1,12 +1,20 @@
-<h1> Cupons disponíveis</h1>
-<%= link_to 'Novo cupom avulso', new_single_coupon_path %>
-
-<% @coupons.each do |coupon| %>
-<div>
-  <p>
-  <b><%= link_to coupon.token, coupon %> - Desconto:<%= coupon.discount_rate%><br/>
-  Expira dia <%=coupon.expire_date%></b>
-  </p> 
+<div class="text-center">
+  <%= link_to 'Novo cupom avulso', new_single_coupon_path, :class => "btn btn-outline-dark btn-lg" %>
 </div>
-<%end%>
-<%= link_to 'Voltar', root_path %>
+
+<h1> Cupons disponíveis</h1>
+<% @coupons.each do |coupon| %>
+  <div>
+    <ul>
+      <li> <%= link_to coupon.token, coupon %> </li>
+      <ul>
+        <li> Desconto:<%= coupon.discount_rate%> </li>
+        <li> Expira dia <%=coupon.expire_date%> </li>
+      </ul>
+    </ul>
+  </div>
+<% end %>
+
+<div>
+  <%= link_to 'Voltar', root_path %>
+</div>
