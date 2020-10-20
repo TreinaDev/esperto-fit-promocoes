@@ -24,8 +24,22 @@
       <div class="row">
         <% @promotion.coupons.each do |coupon| %>
           <div class="col-sm-6 col-md-3">
-            <div class="badge badge-primary p-1">
-              <strong><%= coupon.token %></strong>
+            <div class="card">
+              <div class="card-header font-weight-bold">
+                <%= coupon.token %>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <% if coupon.usable? %>
+                    <%= link_to 'Descartar', [:discard, @promotion, coupon], method: :post, class: 'btn btn-danger' %>
+                  <% elsif coupon.discarded?%>
+                    descartado em <strong><%= l coupon.discard_date%></strong> por <strong><%= coupon.discard_user%></strong>
+                    <%= link_to 'Desfazer descarte', [:retrieve, @promotion, coupon], method: :post, class: 'btn btn-primary mt-2' %></b>
+                  <% else %>
+                    já foi consumido
+                  <%end%>
+                </li>
+              </ul>
             </div>
           </div>
         <% end %>
