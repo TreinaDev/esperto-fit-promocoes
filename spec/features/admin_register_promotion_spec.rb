@@ -21,9 +21,9 @@ feature 'Promotion' do
     expect(page).to have_content 'Promoção cadastrada com sucesso!'
     expect(page).to have_content 'Promoção de natal'
     expect(page).to have_content 'Faça matrícula no período de natal e ganhe atendimento com nutricionista por um mês.'
-    expect(page).to have_content '100,0% de desconto'
-    expect(page).to have_content 'Cupons disponíveis: 50'
-    expect(page).to have_content 'Número de mensalidade(s): 6'
+    expect(page).to have_content 'Percentual de desconto 100,0%'
+    expect(page).to have_content 'Cupons disponíveis 50'
+    expect(page).to have_content 'Número de mensalidade(s) 6'
     expect(page).to have_content 'PROMONAT'
     expect(page).to have_content '13/01/2021'
   end
@@ -39,9 +39,9 @@ feature 'Promotion' do
     expect(current_path).to eq promotion_path(promo)
     expect(page).to have_content 'Promoção de natal'
     expect(page).to have_content 'Faça matrícula no período de natal e ganhe atendimento com nutricionista por um mês.'
-    expect(page).to have_content '100,0% de desconto'
-    expect(page).to have_content 'Número de mensalidade(s): 6'
-    expect(page).to have_content 'Cupons disponíveis: 10'
+    expect(page).to have_content 'Percentual de desconto 100,0%'
+    expect(page).to have_content 'Número de mensalidade(s) 6'
+    expect(page).to have_content 'Cupons disponíveis 10'
     expect(page).to have_content '09/09/2024'
     expect(promo.token).to be_present
     expect(page).to have_content promo.token
@@ -65,9 +65,9 @@ feature 'Promotion' do
     expect(page).to have_content 'Promoção cadastrada com sucesso!'
     expect(page).to have_content 'Promoção de natal'
     expect(page).to have_content 'Faça matrícula no período de natal e ganhe atendimento com nutricionista por um mês.'
-    expect(page).to have_content '100,0% de desconto'
-    expect(page).to have_content 'Cupons disponíveis: 50'
-    expect(page).to have_content 'Número de mensalidade(s): 6'
+    expect(page).to have_content 'Percentual de desconto 100,0%'
+    expect(page).to have_content 'Cupons disponíveis 50'
+    expect(page).to have_content 'Número de mensalidade(s) 6'
     expect(page).to have_content 'PROMONAT10'
     expect(page).to have_content '13/01/2021'
   end

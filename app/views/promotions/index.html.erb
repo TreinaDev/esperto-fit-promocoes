@@ -1,20 +1,22 @@
-<div class="text-center">
-  <%= link_to 'Cadastrar promoção', new_promotion_path, :class => "btn btn-outline-dark btn-lg" %>
-</div>
+<div class="container mt-5">
+  <p><%= link_to 'Voltar', root_path, class: 'my-5' %></p>
+  <%= link_to 'Cadastrar promoção', new_promotion_path, class: 'btn btn-outline-primary' %>
 
-<h1> Promoções </h1>
+  <h1 class="my-3 text-center">Promoções</h1>
 
-<% @promotions.each do |promotion| %>
-<div>
-  <ul>
-    <li> <%= link_to promotion.name, promotion %> </li>
-    <ul>
-      <li> Desconto: <%= number_to_percentage(promotion.discount_rate, separator: ',', precision: 1) %> </li>
-      <li> Expira dia: <%= l promotion.expire_date%> </li>
-    </ul>
-  </ul>
-<% end %>
-
-<div>
-  <%= link_to 'Voltar', root_path %>
+  <div class="row">
+    <% @promotions.each do |promotion| %>
+      <div class="col-md-4 col-sm-12 mb-3">
+        <div class="card">
+          <div class="card-header font-weight-bold">
+            <%= link_to promotion.name, promotion %>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"> Desconto: <%= number_to_percentage(promotion.discount_rate, separator: ',', precision: 1) %> </li>
+            <li class="list-group-item"> Expira dia: <%= l promotion.expire_date%> </li>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
