@@ -4,11 +4,12 @@ feature 'Regular user discards a promotion coupon' do
   scenario 'successfully' do
     user = create(:user)
     login_as user
-    create(:promotion, token: 'PROMONAT1', coupon_quantity: 1)
+    promotion = create(:promotion, token: 'PROMONAT1', coupon_quantity: 1)
+    create(:single_coupon)
 
     visit root_path
     click_on 'Promoções'
-    click_on 'Promoção de natal'
+    click_on promotion.name
     click_on 'Emitir cupons'
     travel_to Time.zone.local(2024, 0o5, 0o5, 12, 30, 45) do
       click_on 'Descartar'

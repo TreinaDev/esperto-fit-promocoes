@@ -1,5 +1,6 @@
 <div class="container mt-3">
   <%= link_to 'Editar promoção', edit_promotion_path(@promotion), class: 'btn btn-outline-primary' if @promotion.coupon_quantity!= 0 %>
+  <%= link_to 'Voltar', promotions_path %>
 
   <div class="my-3">
     <h3><%= @promotion.name %></h3>
@@ -46,4 +47,5 @@
       </div>
     <% end %>
   </div>
+
 </div>

@@ -1,1 +1,7 @@
+<h1 class="my-3 text-center" > Cadastro de nova Promoção </h1>
+
+<div class="container mt-5">
+  <p> <%= link_to 'Voltar', promotions_path, class: 'my-5' %> </p>
+</div>
+
 <%= render partial: 'form', locals: { promotion: @promotion } %>

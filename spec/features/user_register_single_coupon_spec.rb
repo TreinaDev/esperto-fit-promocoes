@@ -40,7 +40,9 @@ feature 'Register single coupon' do
 
   scenario 'and view only not used coupons' do
     user = create(:user)
-    create_list(:single_coupon, 3)
+    create(:single_coupon, token: 'ANIVER251')
+    create(:single_coupon, token: 'ANIVER252')
+    create(:single_coupon, token: 'ANIVER253')
     create(:single_coupon, status: :consumed, token: 'DONTSHOW', discount_rate: 65)
 
     login_as user

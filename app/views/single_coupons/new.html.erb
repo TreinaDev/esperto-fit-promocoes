@@ -1,37 +1,39 @@
-<div>
-  <% if @coupon.errors.any? %>
-    <ul>
-      <% @coupon.errors.full_messages.each do |message| %>
-        <b><li><%= message %></li></b>
-      <%end%>
-    </ul>
-  <% end %>
-</div>
 
-<%= form_with model: @coupon, local: true do |form| %>
-  <div class='col-xl-2'>
-    <div class='form-group'>
-      <%= form.label :token %>
-      <%= form.text_field :token, min: 6, max: 10, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <%= form.label :discount_rate %>
-      <%= form.number_field :discount_rate, min: 0, max: 100, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <%= form.label :expire_date %>
-      <%= form.date_field :expire_date, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <%= form.label :monthly_duration %>
-      <%= form.number_field :monthly_duration, min: 0, class: 'form-control' %>
-    </div>
-    <div>
-      <%= form.submit 'Gerar cupom'%>
-    </div>
+<div class="container mt-5">
+  <p> <%= link_to 'Voltar', single_coupons_path, class: 'my-5' %> </p>
+  <div>
+    <% if @coupon.errors.any? %>
+      <ul>
+        <% @coupon.errors.full_messages.each do |message| %>
+          <b><li><%= message %></li></b>
+        <%end%>
+      </ul>
+    <% end %>
   </div>
-<% end %>
 
-<div>
-  <%= link_to 'Voltar', single_coupons_path %>
+  <%= form_with model: @coupon, local: true do |form| %>
+    <div class='col-xl-4'>
+      <div class='form-group'>
+        <%= form.label :token %>
+        <%= form.text_field :token, min: 6, max: 10, class: 'form-control' %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :discount_rate %>
+        <%= form.number_field :discount_rate, min: 0, max: 100, class: 'form-control' %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :expire_date %>
+        <%= form.date_field :expire_date, class: 'form-control' %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :monthly_duration %>
+        <%= form.number_field :monthly_duration, min: 0, class: 'form-control' %>
+      </div>
+      <div>
+        <%= form.submit 'Gerar cupom'%>
+      </div>
+    </div>
+  <% end %>
+
+
 </div>

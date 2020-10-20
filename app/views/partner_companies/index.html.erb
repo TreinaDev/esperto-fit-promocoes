@@ -1,21 +1,35 @@
-<div class="text-center">
-  <%= link_to 'Cadastrar Empresa', new_partner_company_path, :class => "btn btn-outline-dark btn-lg" %>
-</div>
+<div class="container mt-5">
+  <p><%= link_to 'Voltar', root_path, class: 'my-5'%></p>
+  <%= link_to 'Cadastrar Empresa', new_partner_company_path, class: 'btn btn-outline-primary' %>
 
-<% if @partner_companies.empty? %>
-  <h3> <%= t('.not_found') %> </h3>
-<% end %>
-
-<h3> Empresas parceiras cadastradas </h3>
-<div>
-  <% @partner_companies.each do |company| %>
-    <ul>
-      <li> <%= link_to company.name, company %> </li>
-    </ul>
+  <% if @partner_companies.empty? %>
+    <h3> <%= t('.not_found') %> </h3>
   <% end %>
-</div>
 
-<div>
-  <%= link_to 'Voltar', root_path %>
+  <h1 class="my-3 text-center"> Empresas parceiras cadastradas </h1>
+
+  <div class="row">
+    <% @partner_companies.each do |company| %>
+      <div class="col-md-4 col-sm-12 mb-3">
+        <div class="card">
+          <div class="card-header font-weight-bold">
+            <%= link_to company.name, company %>
+          </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"> <%= company.discount %> </li>
+              <% if company.discount_duration_undefined %>
+                <li class="list-group-item"> Prazo indefinido </li>
+              <% else %>
+                <li class="list-group-item"> <%= company.discount_duration %> </li>
+              <% end %>
+            </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+
+  </div>
 </div>
 
