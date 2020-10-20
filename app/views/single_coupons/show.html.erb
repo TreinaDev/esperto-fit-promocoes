@@ -1,21 +1,25 @@
-<div>
-  <dl>
-  <dt> <%= Promotion.human_attribute_name(:token) %> <%= @single_coupon.token%><br/>
-  <p>
-  <dd> <%= number_to_percentage(@single_coupon.discount_rate, separator: ',', precision: 1) %> de desconto</dd><br/>
-  <dd>Expira em <%= l @single_coupon.expire_date %> </dd><br/>
-  <dd> <%= Promotion.human_attribute_name(:monthly_duration) %>: <%=@single_coupon.monthly_duration%> </dd><br/>
-  <% if @single_coupon.usable? %>
-    <dd> <%=link_to 'Descartar', discard_single_coupon_path(@single_coupon), method: :post%>
-     <% elsif @single_coupon.discarded?%>
-     descartado em <%= l @single_coupon.discard_date%> por <%= @single_coupon.discard_user%>
-     <%= link_to 'Desfazer descarte', retrieve_single_coupon_path(@single_coupon), method: :post %></b>
-     <% else %>
-     já foi consumido
-     <%end%></dd><br/>
-  </dl>
-</div>
+<div class="container mt-3">
 
-<div>
   <%= link_to 'Voltar', single_coupons_path %>
+
+  <div class="my-3">
+    <h3> <%= SingleCoupon.human_attribute_name(:token) %>: <%= @single_coupon.token%></h3>
+    <dl>
+    <dt> <%= SingleCoupon.human_attribute_name(:discount_rate) %> </dt>
+    <dd> <%= number_to_percentage(@single_coupon.discount_rate, separator: ',', precision: 1) %> </dd>
+    <dt> <%= SingleCoupon.human_attribute_name(:expire_date) %> </dt>
+    <dd> <%= l @single_coupon.expire_date %> </dd>
+    <dt> <%= SingleCoupon.human_attribute_name(:monthly_duration) %> </dt>
+    <dd> <%=@single_coupon.monthly_duration%> </dd>
+    <% if @single_coupon.usable? %>
+      <dd> <%=link_to 'Descartar', discard_single_coupon_path(@single_coupon), method: :post%>
+      <% elsif @single_coupon.discarded?%>
+      descartado em <%= l @single_coupon.discard_date%> por <%= @single_coupon.discard_user%>
+      <%= link_to 'Desfazer descarte', retrieve_single_coupon_path(@single_coupon), method: :post %></b>
+      <% else %>
+      já foi consumido
+      <%end%></dd><br/>
+    </dl>
+    </dl>
+  </div>
 </div>

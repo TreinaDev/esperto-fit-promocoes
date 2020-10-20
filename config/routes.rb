@@ -8,11 +8,13 @@ Rails.application.routes.draw do
       post 'remove_cpfs', on: :collection
     end
   end
+  
   resources :single_coupons, only: %i[index show new create]
   resources :single_coupons, only: %i[index show] do
     post 'discard', on: :member
     post 'retrieve', on: :member
   end
+
   resources :promotions, only: %i[index create new edit update]
   resources :promotions, only: %i[show] do
     post 'emission', on: :member

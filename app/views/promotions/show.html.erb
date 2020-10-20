@@ -1,5 +1,6 @@
 <div class="container mt-3">
   <%= link_to 'Editar promoção', edit_promotion_path(@promotion), class: 'btn btn-outline-primary' if @promotion.coupon_quantity!= 0 %>
+  <%= link_to 'Voltar', promotions_path %>
 
   <div class="my-3">
     <h3><%= @promotion.name %></h3>
@@ -22,14 +23,18 @@
     <% else %>
       <h4 class="my-3">Coupons emitidos</h4>
       <div class="row">
-        <% @promotion.coupons.each do |coupon| %>
+        <% @promotion.coupons.usable.each do |coupon| %>
           <div class="col-sm-6 col-md-3">
-            <div class="badge badge-primary p-1">
-              <strong><%= coupon.token %></strong>
+            <div class="badge badge-primary mb-3">
+              <strong> <%= coupon.token %> </strong>
             </div>
           </div>
         <% end %>
       </div>
+      <div>
+        <%= link_to 'Descarte de cupons', promotion_coupons_path(@promotion), class: "btn btn-outline-primary"%>
+      </div>
     <% end %>
   </div>
+
 </div>

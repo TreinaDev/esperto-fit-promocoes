@@ -1,15 +1,18 @@
-<%= "#{@promotion.name} - #{@promotion.token}"%><br/>
-<div>
-  <% @coupons.each do |coupon| %>
-  <b><%= coupon.token %> 
-     <% if coupon.usable? %>
-     <%=link_to 'Descartar', discard_promotion_coupon_path(@promotion, coupon), method: :post%>
-     <% elsif coupon.discarded?%>
-     descartado em <%= l coupon.discard_date%> por <%= coupon.discard_user%>
-     <%= link_to 'Desfazer descarte', retrieve_promotion_coupon_path(@promotion, coupon), method: :post %></b>
-     <% else %>
-     já foi consumido
-     <%end%><br/>
-  <% end %>
-  <%= link_to 'Voltar', promotion_path(@promotion)%>
+<div class="container mt-5">
+
+  <p> <%= link_to 'Voltar', promotion_path(@promotion), class: 'my-5'%> </p>
+  <h1 class="my-3 text-center"> <%= "#{@promotion.name} - #{@promotion.token}"%> </h1>
+  <div>
+    <% @coupons.each do |coupon| %>
+    <strong><%= coupon.token %></strong>
+      <% if coupon.usable? %>
+        <%=link_to 'Descartar', discard_promotion_coupon_path(@promotion, coupon), method: :post%>
+      <% elsif coupon.discarded?%>
+        descartado em <%= l coupon.discard_date%> por <%= coupon.discard_user %>
+        <%= link_to 'Desfazer descarte', retrieve_promotion_coupon_path(@promotion, coupon), method: :post %>
+      <% else %>
+      já foi consumido
+      <%end%><br/>
+    <% end %>
+  </div>
 </div>

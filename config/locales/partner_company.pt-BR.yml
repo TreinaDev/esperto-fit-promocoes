@@ -13,7 +13,7 @@ pt-BR:
         email: Email
         discount: Desconto
         discount_duration: Prazo
-        discount_duration_undefined: Prazo Indefinido
+        discount_duration_undefined: Indefinido
         user: Funcionário responsável
         user_id: Funcionário responsável
   partner_companies:

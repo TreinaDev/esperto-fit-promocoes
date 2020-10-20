@@ -2,6 +2,7 @@ class PromotionsController < ApplicationController
   before_action :authorize_admin, only: %i[new create edit]
   before_action :set_promotion, only: %i[show edit update emission]
   before_action :verify_emitted_coupons, only: %i[edit update]
+
   def index
     @promotions = Promotion.all
   end
@@ -33,7 +34,7 @@ class PromotionsController < ApplicationController
     return render status: :precondition_failed, json: 'Emissão de cupons indisponível' unless @promotion.available?
 
     @promotion.generate_coupons!
-    redirect_to @promotion, notice: 'Cupons emitidos com sucesso'
+    redirect_to promotion_coupons_path(@promotion), notice: 'Cupons emitidos com sucesso'
   end
 
   private
