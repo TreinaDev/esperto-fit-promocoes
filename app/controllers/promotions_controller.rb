@@ -33,7 +33,7 @@ class PromotionsController < ApplicationController
     return render status: :precondition_failed, json: 'Emissão de cupons indisponível' unless @promotion.available?
 
     @promotion.generate_coupons!
-    redirect_to promotion_coupons_path(@promotion), notice: 'Cupons emitidos com sucesso'
+    redirect_to @promotion, notice: 'Cupons emitidos com sucesso'
   end
 
   private
