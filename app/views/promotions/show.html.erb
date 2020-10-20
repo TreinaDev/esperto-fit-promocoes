@@ -1,18 +1,40 @@
-<%= link_to 'Editar promoção', edit_promotion_path(@promotion) if @promotion.coupon_quantity!= 0 %>
+<div class="container mt-3">
+  <%= link_to 'Editar promoção', edit_promotion_path(@promotion), class: 'btn btn-outline-primary' if @promotion.coupon_quantity!= 0 %>
+  <%= link_to 'Voltar', promotions_path %>
 
-<div>
-  <dl>
-  <dt><%= @promotion.name %></dt> - <%= Promotion.human_attribute_name(:token) %> <%= @promotion.token%><br/>
-  <p>
-  <dd><%= @promotion.description %><dd><br/>
-  <dd><%= number_to_percentage(@promotion.discount_rate, separator: ',', precision: 1) %> de desconto</dd><br/>
-  <dd><%=Promotion.human_attribute_name(:coupon_quantity)%>: <%= @promotion.coupon_quantity%></dd><br/>
-  <dd>Expira em <%= l @promotion.expire_date %></dd><br/>
-  <dd><%= Promotion.human_attribute_name(:monthly_duration) %>: <%=@promotion.monthly_duration%></dd><br/>
-  <% if @promotion.available? %>
-    <dd><%= link_to 'Emitir cupons', emission_promotion_path(@promotion), method: :post %></dd>
-  <% else %>
-    <dd><%= link_to 'Ver cupons emitidos', promotion_coupons_path(@promotion) %></dd>
-  <% end %>
-  </dl>
+  <div class="my-3">
+    <h3><%= @promotion.name %></h3>
+    <dl>
+      <dt><%= Promotion.human_attribute_name(:token) %></dt>
+      <dd><%= @promotion.token%></dd>
+      <dt><%= Promotion.human_attribute_name(:description) %></dt>
+      <dd><%= @promotion.description %><dd>
+      <dt><%= Promotion.human_attribute_name(:discount_rate) %></dt>
+      <dd><%= number_to_percentage(@promotion.discount_rate, separator: ',', precision: 1) %></dd>
+      <dt><%= Promotion.human_attribute_name(:coupon_quantity) %></dt>
+      <dd><%= @promotion.coupon_quantity%></dd>
+      <dt><%= Promotion.human_attribute_name(:expire_date) %></dt>
+      <dd><%= l @promotion.expire_date %></dd>
+      <dt><%= Promotion.human_attribute_name(:monthly_duration) %></dt>
+      <dd><%=@promotion.monthly_duration%></dd>
+    </dl>
+    <% if @promotion.available? %>
+      <%= link_to 'Emitir cupons', emission_promotion_path(@promotion), method: :post, class: 'btn btn-primary' %>
+    <% else %>
+      <h4 class="my-3">Coupons emitidos</h4>
+      <div class="row">
+        <% @promotion.coupons.usable.each do |coupon| %>
+          <div class="col-sm-6 col-md-3">
+            <div class="badge badge-primary mb-3">
+              <strong> <%= coupon.token %> </strong>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to 'Descarte de cupons', promotion_coupons_path(@promotion), class: "btn btn-outline-primary"%>
+      </div>
+    <% end %>
+  </div>
+
 </div>

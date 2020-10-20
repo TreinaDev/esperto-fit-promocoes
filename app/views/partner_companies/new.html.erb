@@ -1,7 +1,6 @@
-<h1> Cadastro de nova empresa parceira </h1>
+<h1 class="my-3 text-center" > Cadastro de nova empresa parceira </h1>
+<div class="container mt-5">
+  <p> <%= link_to 'Voltar', partner_companies_path, class: 'my-5' %> </p>
+</div>
 
 <%= render partial: 'form', locals: { partner_company: @partner_company } %>
-
-<div>
-  <%= link_to 'Voltar', partner_companies_path %>
-</div>

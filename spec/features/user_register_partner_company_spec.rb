@@ -29,7 +29,7 @@ feature 'User register partner company' do
     expect(page).to have_content('Av. Paulista, 1000')
     expect(page).to have_content('usuario@empresa1.com.br')
     expect(page).to have_content('Cadastro feito com sucesso')
-    expect(page).to have_content('30%')
+    expect(page).to have_content('30,0%')
     expect(page).to have_content('Indefinido')
   end
 
@@ -54,7 +54,7 @@ feature 'User register partner company' do
     expect(page).to have_content('Av. Paulista, 1000')
     expect(page).to have_content('usuario@empresa1.com.br')
     expect(page).to have_content('Cadastro feito com sucesso')
-    expect(page).to have_content('30%')
+    expect(page).to have_content('30,0%')
     expect(page).to have_content('12 meses')
   end
 
@@ -80,7 +80,7 @@ feature 'User register partner company' do
     expect(page).to have_content('Av. Paulista, 1000')
     expect(page).to have_content('usuario@empresa1.com.br')
     expect(page).to have_content('Cadastro feito com sucesso')
-    expect(page).to have_content('30%')
+    expect(page).to have_content('30,0%')
     expect(page).to have_content('Indefinido')
     expect(PartnerCompany.last.discount_duration).to eq nil
   end

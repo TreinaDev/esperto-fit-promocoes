@@ -2,6 +2,7 @@ class PromotionsController < ApplicationController
   before_action :authorize_admin, only: %i[new create edit]
   before_action :set_promotion, only: %i[show edit update emission]
   before_action :verify_emitted_coupons, only: %i[edit update]
+
   def index
     @promotions = Promotion.all
   end

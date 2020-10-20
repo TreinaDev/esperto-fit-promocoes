@@ -1,31 +1,33 @@
-<div>
-  <%= link_to 'Cadastrar CPF', new_partner_company_partner_company_employee_path(@partner_company) %>
+<div class="container mt-3">
+  <p> <%= link_to 'Voltar', partner_companies_path, class: 'my-5'%> </p>
+
+  <div class="d-flex justify-content-center">
+    <%= link_to 'Cadastrar CPF', new_partner_company_partner_company_employee_path(@partner_company), class: 'btn btn-outline-primary mr-3' %>
+    <%= link_to 'Editar empresa parceira', edit_partner_company_path(@partner_company), class: 'btn btn-outline-primary mr-3' %>
+    <%= link_to 'Remover CPF', remove_form_partner_company_partner_company_employees_path(@partner_company), class: 'btn btn-outline-primary mr-3' %>
+    <%= link_to 'Clientes com Desconto', clients_partner_company_path(@partner_company), class: 'btn btn-outline-primary' %>
+  </div>
+
+  <div class="my-3">
+    <h3><%= @partner_company.name %> </h3>
+      <dl>
+        <dt> <%= PartnerCompany.human_attribute_name(:cnpj) %> </dt>
+        <dd> <%= @partner_company.cnpj %>  </dd>
+        <dt> <%= PartnerCompany.human_attribute_name(:address) %> </dt>
+        <dd> <%= @partner_company.address %>  </dd>
+        <dt> <%= PartnerCompany.human_attribute_name(:email) %> </dt>
+        <dd> <%= @partner_company.email %> </dd>
+        <dt> <%= PartnerCompany.human_attribute_name(:discount) %> </dt>
+        <dd> <%= number_to_percentage(@partner_company.discount, precision: 1) %> </dd>
+        <dt> <%= PartnerCompany.human_attribute_name(:discount_duration)%> </dt>
+        <% if @partner_company.discount_duration_undefined? %>
+          <dd> <%= PartnerCompany.human_attribute_name(:discount_duration_undefined)%> </dd>
+        <% else %>
+          <dd> <%= @partner_company.discount_duration %>  meses </dd>
+        <% end %>
+        <dt> <%= PartnerCompany.human_attribute_name(:user) %> </dt>
+        <dd> <%= @partner_company.user.email %> </dd>
+      </dl>
+  </div>
 </div>
 
-<div>
-  <%= link_to 'Editar empresa parceira', edit_partner_company_path(@partner_company) %>
-</div>
-
-<div>
-  <%= link_to 'Remover CPF', remove_form_partner_company_partner_company_employees_path(@partner_company) %>
-</div>
-
-<div>
-  <%= link_to 'Clientes com Desconto', clients_partner_company_path(@partner_company) %>
-</div>
-
-<div>
-  <ul>
-    <li> <%= "#{PartnerCompany.human_attribute_name(:name)}: #{@partner_company.name}" %> </li>
-    <li> <%= "#{PartnerCompany.human_attribute_name(:cnpj)}: #{@partner_company.cnpj}" %> </li>
-    <li> <%= "#{PartnerCompany.human_attribute_name(:address)}: #{@partner_company.address}" %> </li>
-    <li> <%= "#{PartnerCompany.human_attribute_name(:email)}: #{@partner_company.email}" %> </li>
-    <li> <%= "#{PartnerCompany.human_attribute_name(:discount)}: #{number_to_percentage(@partner_company.discount, precision: 0)}" %> </li>
-    <% if @partner_company.discount_duration_undefined? %>
-      <li> <%= PartnerCompany.human_attribute_name(:discount_duration_undefined) %> </li>
-    <% else %>
-      <li> <%=  "#{PartnerCompany.human_attribute_name(:discount_duration)}: #{@partner_company.discount_duration} meses" %> </li>
-    <% end %>
-    <li> <%= "#{PartnerCompany.human_attribute_name(:user)}: #{@partner_company.user.email}" %> </li>
-  </ul>
-</div>

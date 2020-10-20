@@ -1,65 +1,69 @@
-<% if partner_company.errors.any? %>
-  <ul>
-    <% partner_company.errors.full_messages.each do |message| %>
-      <li> <%= message %></li>
-    <% end%>
-  </ul>
-<% end %>
+<div class="container mt-5" >
+  <% if partner_company.errors.any? %>
+    <ul>
+      <% partner_company.errors.full_messages.each do |message| %>
+        <li> <%= message %></li>
+      <% end%>
+    </ul>
+  <% end %>
 
-<%= form_with model: partner_company, local: true do |form| %>
-  <div class='col-xl-3'>
-    <div class='form-group'>
-      <%= form.label :name %>
-      <%= form.text_field :name, class: 'form-control' %>
+  <%= form_with model: partner_company, local: true do |form| %>
+    <div class='col-xl-4'>
+      <div class='form-group'>
+        <%= form.label :name %>
+        <%= form.text_field :name, class: 'form-control' %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :cnpj %>
+        <%= form.text_field :cnpj, class: 'form-control' %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :address %>
+        <%= form.text_field :address, class: 'form-control' %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :email %>
+        <%= form.text_field :email, class: 'form-control' %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :discount %> <i> (porcentagem) </i>
+        <%= form.number_field :discount, class: 'form-control' %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :discount_duration_undefined, t('.duration_undefined'), value: true %>
+        <%= form.radio_button :discount_duration_undefined, true, value: true %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :discount_duration_undefined, t('.duration_defined'), value: false %>
+        <%= form.radio_button :discount_duration_undefined, false, value: false, checked: true %>
+      </div>
+      <div id="discount_duration" class='form-group' >
+        <%= form.label :discount_duration %> <i> (meses) </i>
+        <%= form.number_field :discount_duration, class: 'form-control' %>
+      </div>
+      <div>
+        <%= form.submit 'Cadastrar' %>
+      </div>
     </div>
-    <div class='form-group'>
-      <%= form.label :cnpj %>
-      <%= form.text_field :cnpj, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <%= form.label :address %>
-      <%= form.text_field :address, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <%= form.label :email %>
-      <%= form.text_field :email, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <%= form.label :discount %> <i> (porcentagem) </i>
-      <%= form.number_field :discount, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <%= form.label :discount_duration_undefined, t('.duration_undefined'), value: true %>
-      <%= form.radio_button :discount_duration_undefined, true, value: true %>
-    </div>
-    <div class='form-group'>
-      <%= form.label :discount_duration_undefined, t('.duration_defined'), value: false %>
-      <%= form.radio_button :discount_duration_undefined, false, value: false, checked: true %>
-    </div>
-    <div id="discount_duration" class='form-group' >
-      <%= form.label :discount_duration %> <i> (meses) </i>
-      <%= form.number_field :discount_duration, class: 'form-control' %>
-    </div>
-    <div>
-      <%= form.submit 'Cadastrar' %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
 
-<% content_for :custom_js do %>
-  <script type="text/javascript">
-    var checkbox_false = document.getElementById('partner_company_discount_duration_undefined_false');
-    var checkbox_true = document.getElementById('partner_company_discount_duration_undefined_true');
-    var details_div = document.getElementById('discount_duration');
-    checkbox_false.onchange = function() {
-      if(this.checked) {
-        details_div.style['display'] = 'block';
-      }
-    };
-    checkbox_true.onchange = function() {
-      if(this.checked) {
-        details_div.style['display'] = 'none';
-      }
-    };
-  </script>
-<% end %>
+  <% content_for :custom_js do %>
+    <script type="text/javascript">
+      var checkbox_false = document.getElementById('partner_company_discount_duration_undefined_false');
+      var checkbox_true = document.getElementById('partner_company_discount_duration_undefined_true');
+      var details_div = document.getElementById('discount_duration');
+      checkbox_false.onchange = function() {
+        if(this.checked) {
+          details_div.style['display'] = 'block';
+        }
+      };
+      checkbox_true.onchange = function() {
+        if(this.checked) {
+          details_div.style['display'] = 'none';
+        }
+      };
+    </script>
+  <% end %>
+
+
+</div>

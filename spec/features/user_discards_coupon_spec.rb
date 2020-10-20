@@ -5,6 +5,7 @@ feature 'Regular user discards a promotion coupon' do
     user = create(:user)
     login_as user
     create(:promotion, token: 'PROMONAT1', coupon_quantity: 1)
+    create(:single_coupon)
 
     visit root_path
     click_on 'Promoções'
