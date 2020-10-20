@@ -26,9 +26,9 @@ feature 'Promotion' do
     expect(page).to have_content 'Promoção editada com sucesso!'
     expect(page).to have_content 'Promoção natalina'
     expect(page).to have_content 'Promoção especial de natal.'
-    expect(page).to have_content '10,0% de desconto'
-    expect(page).to have_content 'Cupons disponíveis: 50'
-    expect(page).to have_content 'Número de mensalidade(s): 6'
+    expect(page).to have_content 'Percentual de desconto 10,0%'
+    expect(page).to have_content 'Cupons disponíveis 50'
+    expect(page).to have_content 'Número de mensalidade(s) 6'
     expect(page).to have_content 'PNATAL'
     expect(page).to have_content '13/04/2050'
   end

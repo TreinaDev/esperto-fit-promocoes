@@ -47,7 +47,7 @@ feature 'user creates coupons' do
 
   scenario 'enable coupons list button after emission' do
     promotion = create(:promotion, coupon_quantity: 0)
-    create(:coupon, promotion: promotion)
+    coupon = create(:coupon, promotion: promotion)
     user = create(:user)
     login_as user
 
@@ -55,8 +55,8 @@ feature 'user creates coupons' do
     click_on 'Promoções'
     click_on 'Promoção de natal'
 
-    expect(page).to have_link('Ver cupons emitidos')
     expect(page).not_to have_link('Emitir cupons')
+    expect(page).to have_content(coupon.token)
   end
 
   scenario 'view emitted coupons' do
@@ -68,8 +68,6 @@ feature 'user creates coupons' do
     click_on 'Promoções'
     click_on 'Promoção de natal'
     click_on 'Emitir cupons'
-    click_on 'Voltar'
-    click_on 'Ver cupons emitidos'
 
     expect(page).to have_content('PROMONAT001')
     expect(page).to have_content('PROMONAT005')
