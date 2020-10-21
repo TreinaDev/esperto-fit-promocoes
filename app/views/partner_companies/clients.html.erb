@@ -1,5 +1,8 @@
-<% @clients.each do |client| %>
-  <p><%= client.description %></p>
-<% end %>
+<div class="container mt-5">
+  <p> <%= link_to 'Voltar', @partner_company, class: 'my-5' %> </p>
+  <% @clients.each do |client| %>
+    <p><%= client.description %></p>
+  <% end %>
 
-<p><%= 'Nenhum cliente com desconto' if @clients.blank? %></p>
+  <h3><%= 'Nenhum cliente com desconto' if @clients.blank? %></h3>
+</div>

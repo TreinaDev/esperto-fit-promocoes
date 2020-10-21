@@ -6,6 +6,10 @@ class PartnerCompany < ApplicationRecord
   validates :cnpj, uniqueness: true
   validate :cnpj_validation
 
+  def domain
+    email.split('@').last
+  end
+
   def cnpj_validation
     return if CNPJ.valid?(cnpj)
 

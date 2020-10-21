@@ -35,7 +35,8 @@ class PartnerCompaniesController < ApplicationController
   end
 
   def clients
-    @clients = Client.where(params[:id])
+    @partner_company = PartnerCompany.find(params[:id])
+    @clients = Client.where(@partner_company.domain)
   end
 
   private

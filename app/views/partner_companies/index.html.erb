@@ -16,11 +16,11 @@
             <%= link_to company.name, company %>
           </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item"> <%= company.discount %> </li>
+              <li class="list-group-item">Desconto: <strong><%= company.discount %></strong></li>
               <% if company.discount_duration_undefined %>
-                <li class="list-group-item"> Prazo indefinido </li>
+                <li class="list-group-item">Prazo: <strong>indefinido</strong></li>
               <% else %>
-                <li class="list-group-item"> <%= company.discount_duration %> </li>
+                <li class="list-group-item">Prazo: <strong><%= company.discount_duration %></strong></li>
               <% end %>
             </ul>
         </div>

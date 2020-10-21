@@ -16,7 +16,7 @@ feature 'User view enrolls with discount' do
     faraday_response = double('clients', status: 200, body: json_content)
 
     allow(Faraday).to receive(:get).with('https://localhost:4000/api/v1/clients',
-                                         { company_id: partner_company.id.to_s })
+                                         { company: partner_company.domain })
                                    .and_return(faraday_response)
     login_as(user, scope: :user)
 
@@ -34,7 +34,7 @@ feature 'User view enrolls with discount' do
     faraday_response = double('clients', status: 404, body: {})
 
     allow(Faraday).to receive(:get).with('https://localhost:4000/api/v1/clients',
-                                         { company_id: partner_company.id.to_s })
+                                         { company: partner_company.domain })
                                    .and_return(faraday_response)
     login_as(user, scope: :user)
 

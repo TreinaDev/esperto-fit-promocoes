@@ -8,10 +8,10 @@ describe Client, type: :model do
       faraday_response = double('clients', status: 200, body: json_content)
 
       allow(Faraday).to receive(:get).with('https://localhost:4000/api/v1/clients',
-                                           { company_id: partner_company.id.to_s })
+                                           { company: partner_company.domain })
                                      .and_return(faraday_response)
 
-      result = Client.where(partner_company.id.to_s)
+      result = Client.where(partner_company.domain)
 
       expect(result.length).to eq 2
       expect(result.first.email).to eq('client1@email.com')
@@ -29,10 +29,10 @@ describe Client, type: :model do
       faraday_response = double('clients', status: 404, body: {})
 
       allow(Faraday).to receive(:get).with('https://localhost:4000/api/v1/clients',
-                                           { company_id: partner_company.id.to_s })
+                                           { company: partner_company.domain })
                                      .and_return(faraday_response)
 
-      result = Client.where(partner_company.id.to_s)
+      result = Client.where(partner_company.domain)
 
       expect(result).to be_blank
     end

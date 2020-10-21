@@ -31,5 +31,6 @@ module EspertoFitPromocoes
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.apis = config_for(:external_apis).symbolize_keys!
   end
 end

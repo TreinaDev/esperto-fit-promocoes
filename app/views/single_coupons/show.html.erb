@@ -12,10 +12,10 @@
     <dt> <%= SingleCoupon.human_attribute_name(:monthly_duration) %> </dt>
     <dd> <%=@single_coupon.monthly_duration%> </dd>
     <% if @single_coupon.usable? %>
-      <dd> <%=link_to 'Descartar', discard_single_coupon_path(@single_coupon), method: :post%>
+      <dd> <%=link_to 'Descartar', discard_single_coupon_path(@single_coupon), method: :post, class: 'btn btn-danger' %>
       <% elsif @single_coupon.discarded?%>
-      descartado em <%= l @single_coupon.discard_date%> por <%= @single_coupon.discard_user%>
-      <%= link_to 'Desfazer descarte', retrieve_single_coupon_path(@single_coupon), method: :post %></b>
+        <p>descartado em <strong><%= l @single_coupon.discard_date%></strong> por <strong><%= @single_coupon.discard_user%></strong></p>
+      <p><%= link_to 'Desfazer descarte', retrieve_single_coupon_path(@single_coupon), method: :post, class: 'btn btn-primary' %></p>
       <% else %>
       já foi consumido
       <%end%></dd><br/>

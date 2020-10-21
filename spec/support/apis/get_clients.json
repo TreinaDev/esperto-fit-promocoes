@@ -2,15 +2,19 @@
   {
     "id": 1,
     "email": "client1@email.com",
-    "name": "Paula Ferreira",
     "cpf": "463.383.030-95",
-    "company_id": 1
+    "company_id": 1,
+    "profile": {
+      "name": "Paula Ferreira"
+    }
   },
   {
     "id": 2,
     "email": "client2@email.com",
-    "name": "Pedro Tavares",
     "cpf": "277.868.468-91" ,
-    "company_id": 1
+    "company_id": 1,
+    "profile": {
+      "name": "Pedro Tavares"
+    }
   }
 ]

@@ -1,3 +1,6 @@
-<h1> Editando os dados da empresa - <%= @partner_company.name %> </h1>
+<div class="container mt-5" >
+  <h1 class="my-3 text-center"> Editando os dados da empresa - <%= @partner_company.name %> </h1>
+  <p> <%= link_to 'Voltar', @partner_company, class: 'my-5' %> </p>
 
-<%= render partial: 'form', locals: { partner_company: @partner_company } %>
+  <%= render partial: 'form', locals: { partner_company: @partner_company } %>
+</div>

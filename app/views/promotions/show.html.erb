@@ -1,6 +1,6 @@
 <div class="container mt-3">
+  <p><%= link_to 'Voltar', root_path, class: 'my-5' %></p>
   <%= link_to 'Editar promoção', edit_promotion_path(@promotion), class: 'btn btn-outline-primary' if @promotion.coupon_quantity!= 0 %>
-  <%= link_to 'Voltar', promotions_path %>
 
   <div class="my-3">
     <h3><%= @promotion.name %></h3>
